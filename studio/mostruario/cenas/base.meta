@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "callout",
+      "targetTime": 2.6
+    },
+    {
+      "name": "grifo",
+      "targetTime": 3.2
+    },
+    {
+      "name": "moldura",
+      "targetTime": 4.4
+    },
+    {
+      "name": "icones",
+      "targetTime": 5
+    },
+    {
+      "name": "sys",
+      "targetTime": 5.7
+    },
+    {
+      "name": "fim",
+      "targetTime": 9.55
+    }
+  ],
+  "seed": 3089329100
+}

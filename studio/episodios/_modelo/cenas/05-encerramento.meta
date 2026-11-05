@@ -1,0 +1,10 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "encerramento-sai",
+      "targetTime": 5.307142857142857
+    }
+  ],
+  "seed": 2604359282
+}

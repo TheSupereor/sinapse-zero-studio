@@ -1,0 +1,26 @@
+{
+  "name": "@synapticon/components",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Componentes, templates de cena e helpers de tempo para os vídeos Synapticon.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@synapticon/brand": "workspace:*"
+  },
+  "peerDependencies": {
+    "@canvas-commons/2d": "0.4.0",
+    "@canvas-commons/core": "0.4.0"
+  },
+  "devDependencies": {
+    "@canvas-commons/2d": "0.4.0",
+    "@canvas-commons/core": "0.4.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
+  }
+}

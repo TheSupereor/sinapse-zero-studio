@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="24mm" height="24mm" viewBox="0 0 68.0315 68.0315">
+<defs>
+<path id="font_1_46" d="M.27734376 .32421876 .39794923 .70996096H.51123049V0H.4033203V.49560548L.41064454 .46435548 .3076172 .12548828H.24707031L.14404297 .45458985 .1538086 .49560548V0H.04345703V.70996096H.15966797L.27734376 .32421876Z"/>
+</defs>
+<path transform="matrix(1,0,0,-1,0,68.0315)" d="M0 0H68.0315V68.0315H0Z" fill="#172126" fill-rule="evenodd"/>
+<path transform="matrix(46.26142,0,0,-46.26142,10.88504,57.14646)" stroke-width=".07" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#ffffff" d="M.76 .5C.76 .643594 .643594 .76 .5 .76 .356406 .76 .24 .643594 .24 .5 .24 .356406 .356406 .24 .5 .24 .643594 .24 .76 .356406 .76 .5"/>
+<use data-text="M" xlink:href="#font_1_46" transform="matrix(13.878427,0,0,-13.878427,30.166663,38.64189)" fill="#ffffff"/>
+<path transform="matrix(46.26142,0,0,-46.26142,10.88504,57.14646)" stroke-width=".07" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#ffffff" d="M.857083 .629968C.81065 .757541 .699685 .850652 .565986 .874227 .432288 .897802 .296169 .848258 .208903 .744259"/>
+<path transform="matrix(46.26142,0,0,-46.26142,10.88504,57.14646)" d="M.82 .69 .94 .62 .8 .56Z" fill="#ffffff" fill-rule="evenodd"/>
+</svg>

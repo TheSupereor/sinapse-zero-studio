@@ -1,0 +1,21 @@
+# Dependências e saídas
+node_modules
+dist
+output
+
+# Brutos de gravação (versione só a narração final do episódio)
+**/audio/brutos/
+*.aup3
+*.aup3-shm
+*.aup3-wal
+
+# Python (automação opcional)
+.venv
+__pycache__
+
+# Editor / SO
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db

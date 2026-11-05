@@ -1,0 +1,16 @@
+{
+  "name": "synapticon-studio",
+  "private": true,
+  "type": "module",
+  "description": "Estúdio de vídeos instrutivos da Synapticon Laboratories, sobre Canvas Commons.",
+  "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "pnpm --filter studio dev",
+    "build": "pnpm --filter studio build",
+    "typecheck": "pnpm -r typecheck",
+    "novo": "node scripts/novo-episodio.mjs"
+  }
+}

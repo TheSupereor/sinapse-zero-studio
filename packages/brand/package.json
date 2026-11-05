@@ -1,0 +1,24 @@
+{
+  "name": "@synapticon/brand",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Identidade Synapticon para vídeo: tokens de cor, temas, tipografia e assets.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./assets/*": "./assets/*"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@canvas-commons/2d": "0.4.0",
+    "@canvas-commons/core": "0.4.0"
+  },
+  "devDependencies": {
+    "@canvas-commons/2d": "0.4.0",
+    "@canvas-commons/core": "0.4.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
+  }
+}

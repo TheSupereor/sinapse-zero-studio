@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "abertura-sai",
+      "targetTime": 2.04
+    },
+    {
+      "name": "capitulo-sai",
+      "targetTime": 3.99
+    },
+    {
+      "name": "retomada-sai",
+      "targetTime": 6.39
+    },
+    {
+      "name": "encerramento-sai",
+      "targetTime": 12.297142857142855
+    }
+  ],
+  "seed": 2589931779
+}

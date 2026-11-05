@@ -1,0 +1,10 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "fim",
+      "targetTime": 0.6
+    }
+  ],
+  "seed": 3672189177
+}

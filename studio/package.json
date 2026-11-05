@@ -1,0 +1,23 @@
+{
+  "name": "studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@canvas-commons/2d": "0.4.0",
+    "@canvas-commons/core": "0.4.0",
+    "@synapticon/brand": "workspace:*",
+    "@synapticon/components": "workspace:*"
+  },
+  "devDependencies": {
+    "@canvas-commons/editor": "0.4.0",
+    "@canvas-commons/vite-plugin": "0.4.0",
+    "@canvas-commons/webcodecs": "0.4.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
+  }
+}
