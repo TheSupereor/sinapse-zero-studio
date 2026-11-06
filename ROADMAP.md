@@ -45,7 +45,7 @@ Each step is in the order it happens. The [guide](docs/guide.md) has the how-to.
 6. **Finish.** There are two options:
    - **MP4:** export straight from the editor; narration and sound effects are mixed in.
    - **Video editor:** export a PNG sequence and finish in DaVinci Resolve. That is where the narration, a quiet music bed, subtle sound effects and subtitles go.
-   - **Transitions:** opaque ones can be MP4; overlays must be PNG with alpha ([guide § 10](docs/guide.md#10-exporting)).
+   - **Transitions:** opaque ones can be MP4; overlays must be PNG with alpha ([guide § 11](docs/guide.md#11-exporting)).
 7. **Subtitles.** Write them from the script text. Whisper-based timing is planned as an option.
 
 ### Per-episode checklist
@@ -99,12 +99,27 @@ The reference structure matches the lesson format of the BT training texts:
   - the `panelWipe` scene transition and the `stinger` overlay with alpha;
   - `en`/`pt-BR` locales.
 
+- [x] **Spike: 3D exploded views** (2026-11-06). `packages/three` (`ModelView`), `studio/presets/exploded`, `pnpm export-model`. Results:
+  - **Rendering:** three.js renders inside Canvas Commons and exports to MP4. Rendering took 93 s for 9.5 s of video in headless software GL; a real GPU is much faster.
+  - **Export:** FreeCAD's glTF keeps one named node per part. Headless export needs explicit tessellation, and glTF is in metres.
+  - **Line art:** screen-space edges give outlines of curved surfaces, creases and part boundaries, with hidden lines removed.
+  - **Animation:** explosion, camera and callouts tracking parts are all signals.
+- [x] **3D line styles and guides** (2026-11-06). Line art now comes from mesh edges (creases, plus silhouettes of curved surfaces) instead of screen-space edge detection:
+  - **Styles:** see-through parts with hidden lines dashed (default), X-ray, plain line drawing and solid, all from two signals (`fillOpacity`, `hiddenLines`) that can animate.
+  - **Guides:** chain lines from where each part sat in its host (the nearest bigger part) to where it is now.
+  - **Docs:** [guide § 10](docs/guide.md#10-exploded-views-from-freecad-3d) and the component reference.
 - [x] **Published on GitHub** (2026-11-06). The 3D spike lives on the `spike/exploded-views` branch until it graduates.
 
 ### Next
 
 - [ ] **Private episodes repository** (author). `cd studio/episodes && git init`, with a private remote.
 - [ ] **First FreeCAD drawings** for interstitials (author). Export with TechDraw › Export Page as SVG, into `studio/presets/drawings/` or the episode's `images/`.
+- [ ] **Graduate `ModelView` from spike** (author decides; agent implements):
+  - **GUI export:** check part names with FreeCAD's *File › Export › glTF*, on one of the author's assemblies.
+  - **Original model:** a preset built from one of the author's assemblies, which the README can also show (FreeCAD's example model stays out of git).
+  - **Explosion polish:** sequenced explosions (part groups one after another) and rotation while exploding.
+  - **README:** a highlight with media.
+  - **Merge:** `spike/exploded-views` into `main`.
 - [ ] **Pilot: BT-01 LED, about 90 s** (both, when the author schedules it).
   - Rewrite the script in two columns.
   - Build it with `pnpm new bt-01-led --locale pt-BR`.
@@ -129,5 +144,7 @@ The reference structure matches the lesson format of the BT training texts:
 | 2026-11-05 | **Manim later**, as a WebM-alpha bridge | Canvas Commons covers most needs ([ADR-0003](docs/adr/0003-manim-bridge.md)) |
 | 2026-11-05 | Humor in the **Portal/Half-Life register**, no IP | [voice and tone](docs/voice-and-tone.md) |
 | 2026-11-05 | Repository in **English** and public; **episodes private** | Open to an international audience; the framework is shared, the content is not ([ADR-0004](docs/adr/0004-public-framework-private-episodes.md)) |
-| 2026-11-05 | Export: **MP4** for opaque clips, **PNG + alpha** for overlays and Resolve masters | H.264 has no alpha ([guide § 10](docs/guide.md#10-exporting)) |
+| 2026-11-05 | Export: **MP4** for opaque clips, **PNG + alpha** for overlays and Resolve masters | H.264 has no alpha ([guide § 11](docs/guide.md#11-exporting)) |
 | 2026-11-05 | Scripts and episodes are written **on request only** | The author keeps control of the content |
+| 2026-11-06 | 3D exploded views with **three.js inside Canvas Commons**, in a separate package (`@synapticon/three`) | Keeps timing editable and synced to narration. Blender + Freestyle stays the fallback for hero shots |
+| 2026-11-06 | 3D line art from **mesh edges**, not screen-space edge detection; default look **see-through, hidden lines dashed** | Parts read as wireframe drawings, without walls. Geometric edges can be drawn behind surfaces and dashed, which screen-space edges cannot |

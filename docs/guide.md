@@ -1,6 +1,6 @@
 # Guide
 
-This guide covers the whole workflow: setting up, creating and editing projects, building your own presets and transitions, technical drawings from FreeCAD, and exporting for a video editor. Everything is done by hand in the Canvas Commons editor. Automation is optional and comes later ([ADR-0002](adr/0002-optional-automation.md)).
+This guide covers the whole workflow: setting up, creating and editing projects, building your own presets and transitions, technical drawings and exploded 3D views from FreeCAD, and exporting for a video editor. Everything is done by hand in the Canvas Commons editor. Automation is optional and comes later ([ADR-0002](adr/0002-optional-automation.md)).
 
 - [1. Setup](#1-setup)
 - [2. How Canvas Commons thinks](#2-how-canvas-commons-thinks)
@@ -11,8 +11,9 @@ This guide covers the whole workflow: setting up, creating and editing projects,
 - [7. Theme and language](#7-theme-and-language)
 - [8. Presets and transitions](#8-presets-and-transitions)
 - [9. Technical drawings from FreeCAD](#9-technical-drawings-from-freecad)
-- [10. Exporting](#10-exporting)
-- [11. Troubleshooting](#11-troubleshooting)
+- [10. Exploded views from FreeCAD (3D)](#10-exploded-views-from-freecad-3d)
+- [11. Exporting](#11-exporting)
+- [12. Troubleshooting](#12-troubleshooting)
 
 ---
 
@@ -59,6 +60,7 @@ Two consequences:
 | `showcase/lab` | `/showcase/lab` | The same scenes, light theme, Brazilian Portuguese defaults |
 | `presets/stinger` | `/presets/stinger` | Overlay transition, renders as transparent PNGs |
 | `presets/interstitial` | `/presets/interstitial` | Technical-drawing loading screen, renders as MP4 |
+| `presets/exploded` | `/presets/exploded` | 3D exploded view of a FreeCAD assembly (spike; needs `pnpm model:example`) |
 | `template/template` | `/template/template` | The episode skeleton copied by `pnpm new` |
 | `episodes/<id>/<id>` | `/episodes/<id>/<id>` | Your episodes (git-ignored; see [ADR-0004](adr/0004-public-framework-private-episodes.md)) |
 
@@ -337,7 +339,118 @@ yield* d().plot(4);
   - **Fill patterns and clip paths.** Use geometric (PAT) hatching rather than SVG pattern hatching.
   - **Multi-line text.** Text with several `<tspan>` lines is joined into one line.
 
-## 10. Exporting
+## 10. Exploded views from FreeCAD (3D)
+
+`ModelView`, in the package `@synapticon/three`, draws a 3D assembly as a technical line drawing and explodes it. The explosion, the camera and the line styles are signals: they animate, scrub in the editor and wait on time events like everything else. `studio/presets/exploded` is a working example; open it at `/presets/exploded`.
+
+> **Status: spike.** The API may still change. The example model is not in git, because it is FreeCAD's data: run `pnpm model:example` once to generate it.
+
+### Exporting the model
+
+```
+pnpm export-model path/to/assembly.FCStd studio/presets/models/my-assembly.glb
+pnpm model:example        # FreeCAD's AssemblyExample → studio/presets/models/excavator.glb
+```
+
+The script runs FreeCAD without its window (`freecadcmd`, found under `Program Files\FreeCAD*`, or set `FREECAD_CMD`). It writes glTF with **one named node per part**, and prints the part names:
+
+- **Assembly workbench documents:** every part linked into the first assembly becomes a part, placed where the assembly puts it and named after the linked object's label.
+- **Other documents:** every top-level solid becomes a part.
+
+Tips:
+
+- **Name parts in FreeCAD.** The labels are the names you use in scenes (`offsets`, `pointOf`, `guideParts`).
+- **One solid per part.** Things that move together belong in one body or one link.
+- **Detail.** `DEFLECTION` in `tools/freecad/export_gltf.py` (0.15 mm) sets how finely curves are meshed. Lower is smoother and heavier.
+- **Units.** glTF is in metres, but you never type sizes: offsets are fractions of the assembly, and lines and dashes are in pixels.
+- **GUI export, not verified yet.** *File › Export › glTF* from FreeCAD's interface should work too, but its part naming hasn't been checked.
+
+### Using it in a scene
+
+```tsx
+import {ModelView} from '@synapticon/three';
+import arm from '../models/arm.glb?url';
+
+const model = createRef<ModelView>();
+view.add(<ModelView ref={model} src={arm} orbit={45} elevation={15} />);
+
+yield* waitUntil('explode');
+yield* all(model().explode(1, 2.4), model().guides(1, 0.6), model().zoom(0.7, 2.4));
+```
+
+- **Import with `?url`**, not `?raw`. The model loads asynchronously, and the scene waits for it.
+- **Placement.** The node fills the frame by default. Give it `width`, `height`, `x` and `y` to use part of the screen.
+
+### Line styles
+
+Two signals set the look, `fillOpacity` and `hiddenLines`. They blend freely, so a scene can animate from one style to another: the preset starts solid and dissolves the walls into the see-through drawing.
+
+| Look | `fillOpacity` | `hiddenLines` | Notes |
+|---|---|---|---|
+| **See-through, hidden lines dashed** (default) | `0` | `0.4` | The drafting convention: visible edges solid, edges behind a surface dimmed and dashed (`hiddenDash`, in px). |
+| **X-ray** | `0` | `0.5` | `hiddenDash={null}` draws hidden lines solid. Add `shadowColor={theme.ink} shadowBlur={10}` for a glow, the projected-blueprint look. |
+| **Line drawing** | `0` | `0` | Hidden lines removed, no faces. |
+| **Solid** | `0.85` | `0` | Faces filled with the theme's panel color, which also hides the grid behind the parts. |
+
+Other line options:
+
+- **`strokeWidth`** (signal, px, default 2).
+- **`crease`** (degrees, default 40). Faces meeting at a sharper angle get a line between them. Curved surfaces never show their facets: they get an outline where they turn away from the camera.
+- **`quality`** (default 2). Supersampling, for antialiasing.
+- **Colors** come from the theme: lines are `ink`, faces are `panel`.
+
+### The explosion
+
+At `explode = 1`, every part has moved away from the assembly's center by `spread` × its distance from it, plus its entry in `offsets`.
+
+| Prop | Default | |
+|---|---|---|
+| `explode` | `0` | signal: 0 = assembled, 1 = exploded |
+| `spread` | `1` | strength of the radial explosion |
+| `offsets` | `{}` | extra offset per part name, `[x, y, z]`, as fractions of the assembly's longest side |
+| `stagger` | `0.5` | share of the explosion spent staggering parts; the outermost parts leave first |
+| `ease` | `easeInOutCubic` | applied to each part |
+
+- **Flat assemblies need offsets.** A radial explosion works when parts sit around a center. In a flat assembly, such as the excavator arm, parts only slide along their own plane. Give the parts that should come out sideways an `offsets` entry, like the preset's `sideways` table.
+- **Pins and shafts** read best offset along their own axis, which is how they would really come out.
+- **Axes** are glTF's: y is up (FreeCAD's Z), and x is FreeCAD's X.
+
+### The camera
+
+| Prop | Default | |
+|---|---|---|
+| `orbit` | `35` | signal: azimuth around the vertical axis, degrees |
+| `elevation` | `20` | signal: degrees above the horizon |
+| `zoom` | `1` | signal: 1 = the assembled model's longest side fills the frame height. The framing doesn't change while orbiting |
+| `fov` | `30` | vertical field of view. Lower looks flatter, closer to an axonometric drawing |
+| `modelRotation` | `[0, 0, 0]` | rotates the model itself, degrees |
+
+### Guides
+
+`guides` (signal, opacity, default 0) draws dashed chain lines that show how the parts come apart. Each part's guide runs from the spot it occupied in its **host** to where the part is now. The host is the nearest part bigger than it: for a pin, the bracket it came out of. Because the guide is anchored to both parts, it stays attached while everything moves. The biggest part has no guide.
+
+- **`guideDash`** (px, default `[18, 6, 3, 6]`, a chain line). Any canvas dash pattern works; `[8, 6]` gives plain dashes.
+- **`guideParts`** (part names). Only these parts get guides, which helps when a busy assembly has too many.
+- **Layering.** Guides are drawn under the model, so solid faces cover them and see-through parts don't.
+
+### Callouts that follow parts
+
+`pointOf(name)` returns where a part's center currently is on screen. Pass it as a function, so the callout follows the part while it moves:
+
+```tsx
+<Callout target={() => model().pointOf('Bucket')} elbow={[-150, 150]} text={'BUCKET'} />
+```
+
+### Performance and limits
+
+- **Several models per scene are fine.** Every `ModelView` shares one WebGL context.
+- **Render time.** The preset took about 170 s for 11 s of video in headless software rendering. A browser with a GPU is much faster.
+- **First load.** Edges are extracted once per model when it loads. Meshes of hundreds of thousands of triangles make that noticeable.
+- **Not supported yet:**
+  - parts move in straight lines, with no rotation or multi-step paths;
+  - no colors or textures from the model: everything follows the theme.
+
+## 11. Exporting
 
 Exporter settings live in *Video Settings* and are saved in the project's `.meta`. RENDER writes to `studio/output/`.
 
@@ -380,7 +493,7 @@ ffmpeg -framerate 30 -i output/stinger/%06d.png -c:v prores_ks -profile:v 4444 -
 - **Realtime encode:** encodes about twice as fast for a small size cost. Fine for reviews.
 - **Range:** in Video Settings, exports only part of the timeline. Useful to review one scene.
 
-## 11. Troubleshooting
+## 12. Troubleshooting
 
 | Symptom | Cause and fix |
 |---|---|
@@ -391,4 +504,6 @@ ffmpeg -framerate 30 -i output/stinger/%06d.png -c:v prores_ks -profile:v 4444 -
 | An animation starts late, out of sync | Its event sits before the previous animation ends. Drag the pill later. |
 | Re-rendered sequence has leftover frames at the end | Delete `output/<project>/` before rendering a shorter version. |
 | `pnpm install` refuses a brand-new package version | pnpm's supply-chain policy (`minimumReleaseAge`). Pin a version at least two weeks old; do not add exclusions. |
+| A 3D model draws nothing | The `.glb` is missing (the example is not in git): run `pnpm model:example`, or `pnpm export-model` for your own. Import it with `?url`. |
+| `pnpm export-model`: "freecadcmd not found" | Install FreeCAD 1.x, or set `FREECAD_CMD` to `freecadcmd.exe`. |
 | Fonts look different | Bahnschrift, Segoe UI and Consolas come from Windows. Elsewhere the fallbacks in `typography.ts` apply. |

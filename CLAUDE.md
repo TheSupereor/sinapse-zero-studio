@@ -31,6 +31,7 @@ pnpm install | pnpm dev | pnpm typecheck | pnpm new <id> [--locale en|pt-BR] [--
   - `templates/`: blocks (opening, chapter, recap, closing), interstitial (`drawingInterstitial`);
   - `transitions/`: panelWipe (scene transition), stinger (overlay);
   - `strings.ts` (`useStrings`, locales), `timing.ts`.
+- `packages/three/src` (spike): `ModelView` draws a glTF assembly as technical line art, with signals for explosion, camera, fill, hidden lines and guides, and `pointOf(part)` for callouts. `lines.ts` extracts crease and silhouette edges per part and draws them as instanced thick lines, visible and hidden (dashed) against a depth pre-pass. glTF comes from `pnpm export-model` (`tools/freecad/export_gltf.py`). Guide § 10.
 - `studio/showcase/scenes`: an example of every component. **Update it when you add a component.**
 - `studio/presets/`: standalone preset projects. `stinger.meta` exports transparent PNGs, `interstitial.meta` exports MP4; `drawings/` holds sample SVGs.
 - `studio/template/`: copied by `pnpm new` into `studio/episodes/<id>/`. The project file name = the exported file name.
@@ -47,6 +48,14 @@ pnpm install | pnpm dev | pnpm typecheck | pnpm new <id> [--locale en|pt-BR] [--
 - **SVG parsing:** the parser reads inline styles and attributes only (not CSS classes), ignores `<text>`, and keeps the markup in a live DOM container, so a `<style>` would leak into the page. `TechDrawing` handles all three; reuse its `prepareSvg` approach for other SVG inputs.
 - **Transitions:** `useTransition` callbacks get the context in real pixels, origin top-left, inside save/restore.
 - **Shadowed members:** don't name component members after Node members (`scale`, `draw`, `margin`, `closed` on Curves…). For example, `*draw()` would override `Node.draw(context)`.
+- **3D (`ModelView`):**
+  - **One context:** all instances share one WebGL context, because browsers cap live contexts and scenes rebuild on every reload.
+  - **Units:** glTF is in metres, so part offsets are fractions of the model's longest side.
+  - **Headless export:** freecadcmd must `tessellate()` shapes before `Import.export`, or every node is skipped.
+  - **Colors:** shader colors are raw sRGB (`srgb()`), bypassing three's color management.
+  - **One primitive per face:** CAD glTF splits every face into its own primitive, so `buildEdges` welds vertices across a part's meshes; otherwise every face boundary is an open edge.
+  - **Line meshes are part children:** their geometry is a unit quad, so compute bounding boxes and neighbours *before* adding them (`rig()` does), never with `Box3.setFromObject` on a part afterwards.
+  - **Stencil:** three's `WebGLRenderer` has `stencil: false` by default; the line passes need it, so the shared renderer sets it.
 - **pnpm supply-chain policy:** it refuses recent versions. Pin versions older than 2 weeks; never add `minimumReleaseAgeExclude`.
 
 ## Visual verification

@@ -92,6 +92,26 @@ To use the same block twice in one scene, pass `event: 'another-name'`.
 
 Writing your own: [guide § 8](guide.md#8-presets-and-transitions).
 
+## 3D (spike)
+
+`ModelView` comes from `@synapticon/three`, a separate package so the 2D library stays free of three.js. It draws a glTF assembly as technical line art and explodes it.
+
+| Member | Default | |
+|---|---|---|
+| `src` | — | `import m from './models/arm.glb?url'` |
+| `explode` | `0` | signal: 0 = assembled, 1 = exploded |
+| `orbit` / `elevation` / `zoom` | `35` / `20` / `1` | signals: the camera |
+| `fillOpacity` / `hiddenLines` | `0` / `0.4` | signals: solid faces, and the opacity of hidden lines |
+| `guides` | `0` | signal: opacity of the dashed guides between parts and their hosts |
+| `strokeWidth` | `2` | signal: line width, px |
+| `hiddenDash` / `guideDash` | `[7, 5]` / `[18, 6, 3, 6]` | dash patterns, px; `hiddenDash={null}` = solid |
+| `spread` / `offsets` / `stagger` | `1` / `{}` / `0.5` | how parts move apart |
+| `guideParts` / `crease` / `fov` / `modelRotation` / `quality` | | see the guide |
+| `pointOf(name)` | | a part's current position on screen, for `Callout` targets |
+| `partNames()` | | the parts found in the model |
+
+See [guide § 10](guide.md#10-exploded-views-from-freecad-3d) for exporting from FreeCAD, the line styles and the explosion.
+
 ## Rhythm
 
 - **Durations:** `pace.fast`, `pace.normal` and `pace.slow` are 0.3, 0.6 and 1.2 s. Use them instead of loose numbers.

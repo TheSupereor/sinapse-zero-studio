@@ -49,12 +49,13 @@ Requires Node 20.19+ and a Chromium-based browser (the MP4 exporter uses WebCode
 ```
 packages/brand        @synapticon/brand       color tokens, two themes, typography, logos and icons
 packages/components   @synapticon/components  components, schematic symbols, episode blocks, transitions
+packages/three        @synapticon/three       3D assemblies as technical line art, exploded views (spike)
 studio/               the editor app (Vite + Canvas Commons)
   showcase/           every component, in both themes
   presets/            transitions rendered on their own for a video editor
   template/           the episode skeleton copied by `pnpm new`
   episodes/           your episodes (git-ignored)
-scripts/              `pnpm new`
+scripts/              `pnpm new`, `pnpm export-model` (FreeCAD → glTF)
 docs/                 guide, component reference, voice and tone, script format, ADRs
 ```
 
@@ -62,7 +63,7 @@ Internal packages have no build step: their `exports` point at TypeScript source
 
 ## Documentation
 
-- **[Guide](docs/guide.md):** setup, creating and editing episodes, syncing to narration, writing presets and transitions, FreeCAD drawings, exporting for a video editor.
+- **[Guide](docs/guide.md):** setup, creating and editing episodes, syncing to narration, writing presets and transitions, FreeCAD drawings and exploded 3D views, exporting for a video editor.
 - **[Components](docs/components.md):** API reference.
 - **[Voice and tone](docs/voice-and-tone.md):** the series' dry, institutional humor, and its limits.
 - **[Script format](docs/script-format.md):** A/V scripts with sync markers.
