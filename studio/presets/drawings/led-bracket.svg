@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sample technical drawing: an LED mounting bracket in three views (third-angle projection).
+  Hand-written to mimic a FreeCAD TechDraw export: millimetre units, black strokes,
+  view groups with transforms, ISO line weights (0.5 visible, 0.25 thin), dashed hidden
+  lines, dash-dot centre lines and <text> dimensions. Replace it with your own exports.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="195mm" height="128mm" viewBox="5 40 195 128">
+  <defs>
+    <style>
+      .visible { fill: none; stroke: #000000; stroke-width: 0.5; stroke-linecap: round; stroke-linejoin: round; }
+      .hidden  { fill: none; stroke: #000000; stroke-width: 0.25; stroke-dasharray: 2 1; }
+      .centre  { fill: none; stroke: #000000; stroke-width: 0.25; stroke-dasharray: 5 1 1 1; }
+      .dim     { fill: none; stroke: #000000; stroke-width: 0.25; }
+      .arrow   { fill: #000000; stroke: none; }
+      .label   { fill: #000000; font-family: osifont, sans-serif; font-size: 3.5px; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Front view: x across, z up. Origin at the bottom-left corner of the part. -->
+  <g id="FrontView" transform="translate(40 150)">
+    <rect class="visible" x="0" y="-34" width="80" height="34" />
+    <path class="visible" d="M 0 -4 L 80 -4" />
+    <circle class="visible" cx="40" cy="-20" r="2.5" />
+    <path class="hidden" d="M 7.75 -4 V 0 M 12.25 -4 V 0 M 67.75 -4 V 0 M 72.25 -4 V 0" />
+    <path class="centre" d="M 40 -26.5 V -13.5 M 34.5 -20 H 45.5 M 10 -7 V 3 M 70 -7 V 3" />
+  </g>
+
+  <!-- Top view: x across, depth up (front edge at the bottom). -->
+  <g id="TopView" transform="translate(40 96)">
+    <rect class="visible" x="0" y="-40" width="80" height="40" />
+    <path class="visible" d="M 0 -36 H 80" />
+    <circle class="visible" cx="10" cy="-20" r="2.25" />
+    <circle class="visible" cx="70" cy="-20" r="2.25" />
+    <path class="hidden" d="M 37.5 -40 V -36 M 42.5 -40 V -36" />
+    <path class="centre" d="M 4.75 -20 H 15.25 M 10 -25.25 V -14.75 M 64.75 -20 H 75.25 M 70 -25.25 V -14.75 M 40 -43 V -33" />
+  </g>
+
+  <!-- Right view: depth across (front on the left), z up. -->
+  <g id="RightView" transform="translate(150 150)">
+    <polygon class="visible" points="0,0 40,0 40,-34 36,-34 36,-4 0,-4" />
+    <path class="hidden" d="M 36 -17.5 H 40 M 36 -22.5 H 40 M 17.75 -4 V 0 M 22.25 -4 V 0" />
+    <path class="centre" d="M 33 -20 H 43 M 20 -7 V 3" />
+  </g>
+
+  <!-- Dimensions, in sheet coordinates. -->
+  <g id="Dimensions">
+    <!-- 80: overall width -->
+    <path class="dim" d="M 40 152 V 162 M 120 152 V 162 M 40 160 H 120" />
+    <polygon class="arrow" points="40,160 43,159.4 43,160.6" />
+    <polygon class="arrow" points="120,160 117,159.4 117,160.6" />
+    <text class="label" x="80" y="158.6">80</text>
+
+    <!-- 34: overall height -->
+    <path class="dim" d="M 38 116 H 28 M 38 150 H 28 M 30 116 V 150" />
+    <polygon class="arrow" points="30,116 29.4,119 30.6,119" />
+    <polygon class="arrow" points="30,150 29.4,147 30.6,147" />
+    <text class="label" x="28.6" y="133" transform="rotate(-90 28.6 133)">34</text>
+
+    <!-- 20: height of the LED hole -->
+    <path class="dim" d="M 86 130 H 137 M 122 150 H 137 M 135 130 V 150" />
+    <polygon class="arrow" points="135,130 134.4,133 135.6,133" />
+    <polygon class="arrow" points="135,150 134.4,147 135.6,147" />
+    <text class="label" x="133.6" y="140" transform="rotate(-90 133.6 140)">20</text>
+
+    <!-- 60: mounting hole spacing -->
+    <path class="dim" d="M 50 70 V 46 M 110 70 V 46 M 50 48 H 110" />
+    <polygon class="arrow" points="50,48 53,47.4 53,48.6" />
+    <polygon class="arrow" points="110,48 107,47.4 107,48.6" />
+    <text class="label" x="80" y="46.6">60</text>
+
+    <!-- 40: depth -->
+    <path class="dim" d="M 122 56 H 130 M 122 96 H 130 M 128 56 V 96" />
+    <polygon class="arrow" points="128,56 127.4,59 128.6,59" />
+    <polygon class="arrow" points="128,96 127.4,93 128.6,93" />
+    <text class="label" x="126.6" y="76" transform="rotate(-90 126.6 76)">40</text>
+
+    <!-- Hole callouts -->
+    <path class="dim" d="M 81.77 128.23 L 92 110 H 100" />
+    <polygon class="arrow" points="81.77,128.23 83.76,125.90 82.71,125.32" />
+    <text class="label" x="100.5" y="109" style="text-anchor: start">Ø5 LED</text>
+
+    <path class="dim" d="M 48.41 74.41 L 34 50 H 22" />
+    <polygon class="arrow" points="48.41,74.41 47.40,71.52 46.37,72.13" />
+    <text class="label" x="21.5" y="49" style="text-anchor: end">2× Ø4.5</text>
+  </g>
+</svg>

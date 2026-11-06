@@ -11,6 +11,7 @@ export default defineConfig({
       // so every project file needs a unique name.
       project: [
         './showcase/*.ts', // component gallery, in both themes
+        './presets/*.ts', // standalone transitions, rendered for a video editor
         './template/*.ts', // the episode skeleton copied by `pnpm new`
         './episodes/*/*.ts', // your episodes (git-ignored, see .gitignore)
       ],

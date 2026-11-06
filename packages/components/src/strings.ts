@@ -12,6 +12,15 @@ export interface Strings {
   recapLabel: (code: string) => string;
   closingLines: (code: string) => string[];
   next: string;
+  interstitial: {
+    loading: string;
+    ready: string;
+    title: string;
+    drawingNo: string;
+    scale: string;
+    sheet: string;
+    messages: string[];
+  };
 }
 
 export const strings: Record<Locale, Strings> = {
@@ -20,12 +29,40 @@ export const strings: Record<Locale, Strings> = {
     recapLabel: code => `RECAP · FILE ${code}`,
     closingLines: code => [`Basic training ${code} complete.`, 'Proceed to the next module.'],
     next: 'NEXT',
+    interstitial: {
+      loading: 'LOADING',
+      ready: 'READY',
+      title: 'TITLE',
+      drawingNo: 'DWG NO.',
+      scale: 'SCALE',
+      sheet: 'SHEET',
+      messages: [
+        'Loading training module',
+        'Calibrating instruments',
+        'Locating the fire extinguisher',
+        'Restoring bench to factory condition',
+      ],
+    },
   },
   'pt-BR': {
     openingOverline: 'SYNAPTICON LABORATORIES · TREINAMENTO BÁSICO',
     recapLabel: code => `RETOMADA · ARQUIVO ${code}`,
     closingLines: code => [`Treinamento básico ${code} completo.`, 'Prossiga para o próximo módulo.'],
     next: 'PRÓXIMO',
+    interstitial: {
+      loading: 'CARREGANDO',
+      ready: 'PRONTO',
+      title: 'TÍTULO',
+      drawingNo: 'DES. Nº',
+      scale: 'ESCALA',
+      sheet: 'FOLHA',
+      messages: [
+        'Carregando módulo de treinamento',
+        'Calibrando instrumentos',
+        'Localizando o extintor de incêndio',
+        'Restaurando a bancada às condições de fábrica',
+      ],
+    },
   },
 };
 
