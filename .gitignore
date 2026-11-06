@@ -1,19 +1,23 @@
-# Dependências e saídas
+# Dependencies and build output
 node_modules
 dist
 output
 
-# Brutos de gravação (versione só a narração final do episódio)
-**/audio/brutos/
+# Your episodes are private: this repository is the framework, not the content.
+# Version them in their own repository (see docs/adr/0004-public-framework-private-episodes.md).
+/studio/episodes/
+
+# Raw recordings (only the final narration belongs next to an episode)
+**/audio/raw/
 *.aup3
 *.aup3-shm
 *.aup3-wal
 
-# Python (automação opcional)
+# Python (optional automation)
 .venv
 __pycache__
 
-# Editor / SO
+# Editor / OS
 .vscode/*
 !.vscode/extensions.json
 .idea

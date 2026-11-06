@@ -2,7 +2,9 @@
   "name": "synapticon-studio",
   "private": true,
   "type": "module",
-  "description": "Estúdio de vídeos instrutivos da Synapticon Laboratories, sobre Canvas Commons.",
+  "description": "A code-first studio for narrated explainer videos, built on Canvas Commons (the community fork of Motion Canvas).",
+  "license": "MIT",
+  "author": "Narciso Ferreira",
   "packageManager": "pnpm@12.15.0",
   "engines": {
     "node": ">=20.19"
