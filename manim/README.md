@@ -1,4 +1,3 @@
-# manim/ — reservado
+# manim/: reserved
 
-A ponte com o Manim está adiada. O plano está no [ADR-0003](../docs/adr/0003-ponte-manim.md): cenas
-Manim renderizadas em WebM transparente e encaixadas nos episódios por um componente `ManimClip`.
+The Manim bridge is deferred. The plan is in [ADR-0003](../docs/adr/0003-manim-bridge.md): Manim scenes rendered as transparent WebM and placed in episodes through a `ManimClip` component.

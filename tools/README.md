@@ -1,12 +1,11 @@
-# tools/ — automação opcional
+# tools/: optional automation
 
-Esta pasta está reservada. Nada do estúdio depende dela: o fluxo principal é manual
-([docs/fluxo-manual.md](../docs/fluxo-manual.md)).
+This folder is reserved. Nothing in the studio depends on it: the main workflow is manual ([guide](../docs/guide.md)).
 
-Planejado, ver [ADR-0002](../docs/adr/0002-automacao-opcional.md):
+Planned, see [ADR-0002](../docs/adr/0002-optional-automation.md):
 
-| Comando | O que fará |
+| Command | What it will do |
 |---|---|
-| `pnpm sync <episodio>` | Whisper → alinha com `roteiro.md` → escreve os tempos dos eventos nos `.meta` → gera `legendas.srt` |
+| `pnpm sync <episode>` | Whisper → align with `script.md` → write event times into the `.meta` files → generate `subtitles.srt` |
 
-Quando for implementado, será um projeto Python gerenciado por `uv` (`tools/pyproject.toml`).
+When implemented, it will be a Python project managed with `uv` (`tools/pyproject.toml`).
