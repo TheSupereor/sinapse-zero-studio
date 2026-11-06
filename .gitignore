@@ -7,6 +7,9 @@ output
 # Version them in their own repository (see docs/adr/0004-public-framework-private-episodes.md).
 /studio/episodes/
 
+# Generated from FreeCAD's AssemblyExample (`pnpm model:example`); FreeCAD's data, not ours
+/studio/presets/models/excavator.glb
+
 # Raw recordings (only the final narration belongs next to an episode)
 **/audio/raw/
 *.aup3

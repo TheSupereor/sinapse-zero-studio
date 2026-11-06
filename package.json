@@ -13,6 +13,8 @@
     "dev": "pnpm --filter studio dev",
     "build": "pnpm --filter studio build",
     "typecheck": "pnpm -r typecheck",
-    "new": "node scripts/new-episode.mjs"
+    "new": "node scripts/new-episode.mjs",
+    "export-model": "node scripts/export-model.mjs",
+    "model:example": "node scripts/export-model.mjs --example"
   }
 }
