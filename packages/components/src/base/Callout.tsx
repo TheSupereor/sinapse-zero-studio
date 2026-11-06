@@ -18,101 +18,100 @@ import {
   Vector2,
   Vector2Signal,
 } from '@canvas-commons/core';
-import {fontes, tamanhos, useTema} from '@synapticon/brand';
+import {fonts, sizes, useTheme} from '@synapticon/brand';
 
 export interface CalloutProps extends NodeProps {
-  /** Ponto apontado, no espaço do pai. Pode ser função: `() => led().pino('a')`. */
-  alvo?: SignalValue<PossibleVector2>;
-  /** Deslocamento do cotovelo em relação ao alvo. Padrão: [120, -90]. */
-  cotovelo?: SignalValue<PossibleVector2>;
-  texto: string;
-  /** Cor da linha e do ponto. Padrão: destaque do tema. */
-  cor?: string;
-  /** Já começa visível (uso estático). Padrão: false. */
-  visivel?: boolean;
+  /** The point being labeled, in the parent's space. Can be a function: `() => led().pin('a')`. */
+  target?: SignalValue<PossibleVector2>;
+  /** Offset of the elbow from the target. Default: [120, -90]. */
+  elbow?: SignalValue<PossibleVector2>;
+  text: string;
+  /** Color of the leader line and dot. Default: theme accent. */
+  color?: string;
+  /** Start fully visible (static use). Default: false. */
+  startVisible?: boolean;
 }
 
 /**
- * Rótulo com linha-guia até um ponto, como os da referência
- * ("KV cache", "2 experts in each GPU's memory").
+ * A label with a leader line to a point, like the annotations in hardware explainers.
  *
  * ```tsx
  * const c = createRef<Callout>();
- * view.add(<Callout ref={c} alvo={[200, 0]} texto={'Anodo'} />);
- * yield* c().mostrar();
+ * view.add(<Callout ref={c} target={[200, 0]} text={'Anode'} />);
+ * yield* c().show();
  * ```
  */
 export class Callout extends Node {
   @initial([0, 0])
-  @vector2Signal('alvo')
-  declare public readonly alvo: Vector2Signal<this>;
+  @vector2Signal('target')
+  declare public readonly target: Vector2Signal<this>;
 
   @initial([120, -90])
-  @vector2Signal('cotovelo')
-  declare public readonly cotovelo: Vector2Signal<this>;
+  @vector2Signal('elbow')
+  declare public readonly elbow: Vector2Signal<this>;
 
-  private readonly ponto = createRef<Circle>();
-  private readonly linha = createRef<Line>();
-  private readonly rotulo = createRef<Txt>();
+  private readonly dot = createRef<Circle>();
+  private readonly leader = createRef<Line>();
+  private readonly label = createRef<Txt>();
 
-  public constructor({texto, cor, visivel = false, ...props}: CalloutProps) {
+  public constructor({text, color, startVisible = false, ...props}: CalloutProps) {
     super(props);
-    const tema = useTema();
-    const corLinha = cor ?? tema.destaque;
-    const paraDireita = () => this.cotovelo().x >= 0;
-    const joelho = () => this.alvo().add(this.cotovelo());
-    const ponta = () => joelho().add([paraDireita() ? 48 : -48, 0]);
+    const theme = useTheme();
+    const lineColor = color ?? theme.accent;
+    const toTheRight = () => this.elbow().x >= 0;
+    const knee = () => this.target().add(this.elbow());
+    const tip = () => knee().add([toTheRight() ? 48 : -48, 0]);
 
     this.add(
       <>
         <Line
-          ref={this.linha}
-          points={() => [this.alvo(), joelho(), ponta()]}
-          stroke={corLinha}
+          ref={this.leader}
+          points={() => [this.target(), knee(), tip()]}
+          stroke={lineColor}
           lineWidth={3}
-          end={visivel ? 1 : 0}
+          end={startVisible ? 1 : 0}
         />
         <Circle
-          ref={this.ponto}
-          position={() => this.alvo()}
+          ref={this.dot}
+          position={() => this.target()}
           size={14}
-          fill={corLinha}
-          scale={visivel ? 1 : 0}
+          fill={lineColor}
+          scale={startVisible ? 1 : 0}
         />
         <Txt
-          ref={this.rotulo}
-          text={texto}
-          position={() => ponta().add([paraDireita() ? 14 : -14, 0])}
-          anchorX={() => (paraDireita() ? -1 : 1)}
-          fontFamily={fontes.display}
-          fontSize={tamanhos.rotulo}
+          ref={this.label}
+          text={text}
+          position={() => tip().add([toTheRight() ? 14 : -14, 0])}
+          anchorX={() => (toTheRight() ? -1 : 1)}
+          fontFamily={fonts.display}
+          fontSize={sizes.label}
           fontWeight={600}
-          fill={tema.tinta}
-          opacity={visivel ? 1 : 0}
+          fill={theme.ink}
+          opacity={startVisible ? 1 : 0}
         />
       </>,
     );
   }
 
-  public *mostrar(duracao = 0.6): ThreadGenerator {
+  public *show(duration = 0.6): ThreadGenerator {
     yield* all(
-      this.ponto().scale(1, duracao * 0.4, easeInOutCubic),
-      this.linha().end(1, duracao, easeInOutCubic),
-      delay(duracao * 0.6, this.rotulo().opacity(1, duracao * 0.4)),
+      this.dot().scale(1, duration * 0.4, easeInOutCubic),
+      this.leader().end(1, duration, easeInOutCubic),
+      delay(duration * 0.6, this.label().opacity(1, duration * 0.4)),
     );
   }
 
-  public *esconder(duracao = 0.4): ThreadGenerator {
+  public *hide(duration = 0.4): ThreadGenerator {
     yield* all(
-      this.rotulo().opacity(0, duracao * 0.5),
-      this.linha().start(1, duracao, easeInOutCubic),
-      this.ponto().scale(0, duracao, easeInOutCubic),
+      this.label().opacity(0, duration * 0.5),
+      this.leader().start(1, duration, easeInOutCubic),
+      this.dot().scale(0, duration, easeInOutCubic),
     );
-    this.linha().start(0).end(0);
+    this.leader().start(0).end(0);
   }
 
-  /** Posição atual da ponta do rótulo (útil para encadear outros elementos). */
-  public pontaDoRotulo(): Vector2 {
-    return this.rotulo().position();
+  /** Current position of the label's anchor (handy for chaining other elements). */
+  public labelPosition(): Vector2 {
+    return this.label().position();
   }
 }

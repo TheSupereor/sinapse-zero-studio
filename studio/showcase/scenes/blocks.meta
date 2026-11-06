@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "opening-out",
+      "targetTime": 2.04
+    },
+    {
+      "name": "chapter-out",
+      "targetTime": 3.99
+    },
+    {
+      "name": "recap-out",
+      "targetTime": 6.39
+    },
+    {
+      "name": "closing-out",
+      "targetTime": 12.297142857142855
+    }
+  ],
+  "seed": 2589931779
+}

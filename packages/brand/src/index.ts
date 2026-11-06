@@ -1,4 +1,4 @@
 export * from './tokens';
-export * from './temas';
-export * from './tipografia';
+export * from './themes';
+export * from './typography';
 export * from './assets';

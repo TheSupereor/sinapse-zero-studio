@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "callout",
+      "targetTime": 2.6
+    },
+    {
+      "name": "highlight",
+      "targetTime": 3.2
+    },
+    {
+      "name": "box",
+      "targetTime": 4.4
+    },
+    {
+      "name": "icons",
+      "targetTime": 5
+    },
+    {
+      "name": "sys",
+      "targetTime": 5.7
+    },
+    {
+      "name": "end",
+      "targetTime": 9.55
+    }
+  ],
+  "seed": 3089329100
+}

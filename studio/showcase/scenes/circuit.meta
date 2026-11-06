@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "switch-on",
+      "targetTime": 2.01
+    },
+    {
+      "name": "no-resistor",
+      "targetTime": 3.26
+    },
+    {
+      "name": "end",
+      "targetTime": 9.724285714285713
+    }
+  ],
+  "seed": 113811550
+}

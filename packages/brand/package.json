@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Identidade Synapticon para vídeo: tokens de cor, temas, tipografia e assets.",
+  "description": "Synapticon identity for video: color tokens, themes, typography and assets.",
   "exports": {
     ".": "./src/index.ts",
     "./assets/*": "./assets/*"

@@ -11,6 +11,6 @@
     "dev": "pnpm --filter studio dev",
     "build": "pnpm --filter studio build",
     "typecheck": "pnpm -r typecheck",
-    "novo": "node scripts/novo-episodio.mjs"
+    "new": "node scripts/new-episode.mjs"
   }
 }

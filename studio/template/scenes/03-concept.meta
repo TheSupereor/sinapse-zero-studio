@@ -1,0 +1,14 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "chapter-out",
+      "targetTime": 1.3499999999999999
+    },
+    {
+      "name": "end",
+      "targetTime": 1.9499999999999997
+    }
+  ],
+  "seed": 58477540
+}

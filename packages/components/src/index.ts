@@ -1,19 +1,20 @@
-// Base visual
-export * from './base/Fundo';
+// Visual basics
+export * from './base/Background';
 export * from './base/Callout';
-export * from './base/Destaque';
-export * from './base/Anunciador';
-export * from './base/Cartao';
-export * from './base/Grafico';
-export * from './base/PrintZoom';
-export * from './base/Marca';
+export * from './base/Highlight';
+export * from './base/Announcer';
+export * from './base/StatCard';
+export * from './base/Chart';
+export * from './base/ScreenshotZoom';
+export * from './base/Brand';
 
-// Eletrônica
-export * from './eletronica/Componente';
-export * from './eletronica/simbolos';
-export * from './eletronica/Fio';
-export * from './eletronica/Osciloscopio';
+// Electronics
+export * from './electronics/Part';
+export * from './electronics/symbols';
+export * from './electronics/Wire';
+export * from './electronics/Oscilloscope';
 
-// Estrutura dos episódios e ritmo
-export * from './templates/blocos';
-export * from './tempo';
+// Episode structure and rhythm
+export * from './templates/blocks';
+export * from './strings';
+export * from './timing';

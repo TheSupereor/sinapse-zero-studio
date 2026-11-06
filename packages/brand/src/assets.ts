@@ -1,6 +1,6 @@
 /**
- * Assets da marca, copiados de `~/.claude/skills/synapticon-pdf/kit/`.
- * Ícones e ornamentos vêm como texto SVG para poderem ser recoloridos.
+ * Brand assets. Icons and ornaments are imported as SVG text so they can be recolored.
+ * These files are Synapticon Labs trademarks and are not covered by the MIT license (see NOTICE.md).
  */
 
 const logos = import.meta.glob<string>('../assets/logo/*.png', {
@@ -8,61 +8,60 @@ const logos = import.meta.glob<string>('../assets/logo/*.png', {
   import: 'default',
 });
 
-const icones = import.meta.glob<string>('../assets/icones/*.svg', {
+const icons = import.meta.glob<string>('../assets/icons/*.svg', {
   eager: true,
   query: '?raw',
   import: 'default',
 });
 
-const ornamentos = import.meta.glob<string>('../assets/ornamentos/*.svg', {
+const ornaments = import.meta.glob<string>('../assets/ornaments/*.svg', {
   eager: true,
   query: '?raw',
   import: 'default',
 });
 
-function porNome(mapa: Record<string, string>, nome: string, tipo: string) {
-  const chave = Object.keys(mapa).find(caminho =>
-    caminho.endsWith(`/${nome}.svg`) || caminho.endsWith(`/${nome}.png`),
+function byName(files: Record<string, string>, name: string, kind: string) {
+  const key = Object.keys(files).find(
+    path => path.endsWith(`/${name}.svg`) || path.endsWith(`/${name}.png`),
   );
-  if (!chave) {
-    const disponiveis = Object.keys(mapa)
-      .map(c => c.split('/').pop()!.replace(/\.(svg|png)$/, ''))
+  if (!key) {
+    const available = Object.keys(files)
+      .map(path => path.split('/').pop()!.replace(/\.(svg|png)$/, ''))
       .join(', ');
-    throw new Error(`${tipo} "${nome}" não existe. Disponíveis: ${disponiveis}`);
+    throw new Error(`${kind} "${name}" does not exist. Available: ${available}`);
   }
-  return mapa[chave];
+  return files[key];
 }
 
-export type VarianteLogo = 'full' | 'mark' | 'word';
+export type LogoVariant = 'full' | 'mark' | 'word';
 
-/** URL do logo. `fundo` é o tipo de fundo onde ele vai aparecer. */
-export function logo(variante: VarianteLogo, fundo: 'claro' | 'escuro'): string {
-  return porNome(logos, `${variante}_${fundo}`, 'Logo');
+/** Logo URL. `background` is the kind of background it will sit on. */
+export function logo(variant: LogoVariant, background: 'light' | 'dark'): string {
+  return byName(logos, `${variant}_${background}`, 'Logo');
 }
 
-/** Nomes: bateria, calor, eletronica, esd, furacao, impressao3d, laser, mecanica, motor, parafuso, solda, tensao. */
-export type NomeIcone =
-  | 'bateria'
-  | 'calor'
-  | 'eletronica'
+export type IconName =
+  | '3d-printing'
+  | 'battery'
+  | 'drilling'
+  | 'electronics'
   | 'esd'
-  | 'furacao'
-  | 'impressao3d'
+  | 'heat'
   | 'laser'
-  | 'mecanica'
+  | 'mechanics'
   | 'motor'
-  | 'parafuso'
-  | 'solda'
-  | 'tensao';
+  | 'screw'
+  | 'soldering'
+  | 'voltage';
 
-const GRAFITE = /#172126/gi;
+const GRAPHITE = /#172126/gi;
 
-/** SVG do ícone (só o pictograma), recolorido. */
-export function iconeSvg(nome: NomeIcone, cor: string): string {
-  return porNome(icones, nome, 'Ícone').replace(GRAFITE, cor);
+/** SVG markup of an icon (pictogram only), recolored. */
+export function iconSvg(name: IconName, color: string): string {
+  return byName(icons, name, 'Icon').replace(GRAPHITE, color);
 }
 
-/** SVG de um ornamento do kit (ex.: 'sys-a', 'mira', 'cantoneiras'), na variante do fundo. */
-export function ornamentoSvg(nome: string, fundo: 'claro' | 'escuro'): string {
-  return porNome(ornamentos, `${nome}-${fundo}`, 'Ornamento');
+/** SVG markup of a brand ornament (e.g. 'sys-a', 'crosshair', 'corner-brackets') for a background. */
+export function ornamentSvg(name: string, background: 'light' | 'dark'): string {
+  return byName(ornaments, `${name}-${background}`, 'Ornament');
 }
