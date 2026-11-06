@@ -15,8 +15,10 @@ export * from './electronics/symbols';
 export * from './electronics/Wire';
 export * from './electronics/Oscilloscope';
 
-// Episode structure and rhythm
+// Episode structure, transitions and rhythm
 export * from './templates/blocks';
 export * from './templates/interstitial';
+export * from './transitions/panelWipe';
+export * from './transitions/stinger';
 export * from './strings';
 export * from './timing';

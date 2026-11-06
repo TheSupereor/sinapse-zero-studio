@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Componentes, templates de cena e helpers de tempo para os vídeos Synapticon.",
+  "description": "Animated components, schematic symbols, scene templates and transitions for Synapticon videos.",
   "exports": {
     ".": "./src/index.ts"
   },

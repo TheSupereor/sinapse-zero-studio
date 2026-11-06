@@ -1,0 +1,10 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "interstitial-out",
+      "targetTime": 8
+    }
+  ],
+  "seed": 645334998
+}
