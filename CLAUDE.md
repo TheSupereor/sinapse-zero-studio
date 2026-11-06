@@ -1,45 +1,56 @@
-# CLAUDE.md — synapticon-studio
+# CLAUDE.md
 
-Estúdio de vídeos instrutivos (série BT da Synapticon Laboratories) sobre **Canvas Commons 0.4.0**,
-o fork comunitário do Motion Canvas. É um monorepo pnpm, e o idioma do projeto é português (pt-BR).
+Guidance for AI coding agents working in this repository; Claude Code loads it automatically. People should start with the [README](README.md) and the [guide](docs/guide.md).
 
-## Princípios
+synapticon-studio is a pnpm monorepo for narrated explainer videos (the Synapticon Laboratories BT training series), built on **Canvas Commons 0.4.0**, the community fork of Motion Canvas. Code and docs are in English; the episodes are narrated in Brazilian Portuguese (`locale: 'pt-BR'`).
 
-- **Manual primeiro.** O usuário edita no editor (`pnpm dev`, localhost:9000) e sincroniza arrastando eventos (`waitUntil`) sobre a onda da narração. Automação (Whisper etc.) é **opcional** e escreve nos mesmos `.meta`. Nunca crie dependência de script para uma cena funcionar.
-- **Sem fork do motor.** Ajustes no Canvas Commons vão em `pnpm patch`. Não edite `node_modules`. Ver `docs/adr/0001`.
-- **Cores só pelo tema:** use `useTema()`, nunca hex nas cenas. Os temas são `blueprint` (escuro) e `laboratorio` (claro).
-- **Humor:** registro seco, à la Portal/Half-Life, mas **sem nenhum** nome, personagem, fala ou marca desses jogos (`docs/tom-de-voz.md`).
-- **Estrutura Telecurso:** situação → conceito → retomada (de episódios anteriores, não só do último) → encerramento.
+**Start with `ROADMAP.md`**, the project tracker: the production pipeline, milestones with owners, and the decision log. Tick an item with the date when it is done, and log every decision that changes the plan.
 
-## Comandos
+## Principles
+
+- **Manual first.** The author edits in the editor (`pnpm dev`, localhost:9000) and syncs by dragging time events (`waitUntil`) over the narration waveform. Automation (Whisper, etc.) is optional and writes to the same `.meta` files, so every scene works without it.
+- **Public framework, private episodes.** `studio/episodes/` is git-ignored (ADR-0004): episode content, renders and recordings stay out of commits. Write episodes and scripts only when the author asks.
+- **No engine fork.** Engine fixes go through `pnpm patch`, leaving `node_modules` untouched. See `docs/adr/0001`.
+- **Colors only from the theme:** `useTheme()`, never hex in scenes. Themes: `blueprint` (dark), `lab` (light).
+- **Template text only from `useStrings()`:** add every new default string to both `en` and `pt-BR` in `strings.ts`.
+- **Humor:** dry, in the Portal/Half-Life register, with original names, characters and lines only, and no trademarks from those games (`docs/voice-and-tone.md`).
+- **Episode structure:** situation → opening → concept → recap (of earlier episodes, not only the last one) → closing.
+
+## Commands
 
 ```
-pnpm install | pnpm dev | pnpm typecheck | pnpm novo <id>
+pnpm install | pnpm dev | pnpm typecheck | pnpm new <id> [--locale en|pt-BR] [--theme blueprint|lab]
 ```
 
-## Mapa
+## Map
 
-- `packages/brand/src`: tokens (de `~/.claude/skills/synapticon-pdf/kit/paleta`), `temas.ts` (`useTema`), `tipografia.ts`, `assets.ts` (logo, ícones recoloríveis, ornamentos).
+- `packages/brand/src`: `tokens.ts`, `themes.ts` (`useTheme`), `typography.ts`, `assets.ts` (logo, recolorable icons, ornaments).
 - `packages/components/src`:
-  - `base/`: Fundo, Callout, Grifo/Moldura, Anunciador, Cartao, Grafico, PrintZoom, Marca/Icone;
-  - `eletronica/`: Componente (pinos), símbolos, Fio, Osciloscopio;
-  - `templates/blocos.tsx`: abertura, capitulo, retomada, encerramento;
-  - `tempo.ts`.
-- `studio/mostruario/cenas`: exemplo de uso de cada componente. **Atualize quando criar componente.**
-- `studio/episodios/<id>/<id>.ts`: projeto do episódio. O nome do arquivo = nome do MP4 em `studio/output/`.
+  - `base/`: Background, Callout, HighlightBar/HighlightBox, Announcer, StatCard, Chart, ScreenshotZoom, TechDrawing, LogoMark/BrandIcon;
+  - `electronics/`: Part (pins), symbols, Wire, Oscilloscope;
+  - `templates/`: blocks (opening, chapter, recap, closing), interstitial (`drawingInterstitial`);
+  - `transitions/`: panelWipe (scene transition), stinger (overlay);
+  - `strings.ts` (`useStrings`, locales), `timing.ts`.
+- `studio/showcase/scenes`: an example of every component. **Update it when you add a component.**
+- `studio/presets/`: standalone preset projects. `stinger.meta` exports transparent PNGs, `interstitial.meta` exports MP4; `drawings/` holds sample SVGs.
+- `studio/template/`: copied by `pnpm new` into `studio/episodes/<id>/`. The project file name = the exported file name.
 
-## Armadilhas já encontradas (Canvas Commons ≠ Motion Canvas 3)
+## Gotchas (Canvas Commons ≠ Motion Canvas 3)
 
-- **Âncora:** `offset` **não existe**; use `anchor` / `anchorX` / `anchorY`, com a mesma semântica.
-- **Assets assíncronos:** antes de ler `Img.naturalSize()` e afins, faça `yield node` dentro do gerador, senão aparece o erro "Tried to access an asynchronous property before the node was ready".
-- **Tipos:** os `tsconfig` precisam de `skipLibCheck: true`, porque as declarações do pacote têm erros. Pacotes fora do `studio` precisam de `types: ["vite/client", "@canvas-commons/core/project"]`.
-- **Projetos novos:** um arquivo de projeto novo só aparece depois de reiniciar o `pnpm dev`, porque a lista é lida na inicialização.
-- **Tempo dos eventos:** o `targetTime` no `.meta` é relativo ao início da cena.
-- **Tempo no desenho:** em `drawShape`, use `this.view().globalTime()`. `useTime()` não funciona fora de threads.
-- **Exportação:** o WebCodecs gera MP4 H.264 + AAC, já com `audio` e `sound()` mixados. O FFmpeg está descontinuado.
-- **Política de supply-chain do pnpm:** ela recusa versões recentes. Fixe versões com mais de 2 semanas e não adicione `minimumReleaseAgeExclude`.
+- **Anchors:** `offset` **does not exist**; use `anchor` / `anchorX` / `anchorY`, with the same semantics.
+- **Async assets:** `yield node` before reading `Img.naturalSize()` and the like, or you get "Tried to access an asynchronous property before the node was ready".
+- **Types:** the tsconfigs need `skipLibCheck: true`. Packages outside `studio` also need `types: ["vite/client", "@canvas-commons/core/project"]`.
+- **New projects:** a new project file only shows up after restarting `pnpm dev`.
+- **Event timing:** `targetTime` in a scene `.meta` is relative to the scene start.
+- **Time while drawing:** in `drawShape`, use `this.view().globalTime()`; `useTime()` only works inside threads.
+- **Export:** the WebCodecs exporter writes MP4 H.264 + AAC with `audio` and `sound()` mixed in, and **never alpha**. Overlays need the Image sequence exporter (PNG) with background `none`. The image exporter overwrites by frame number, so stale frames survive a shorter re-render.
+- **SVG parsing:** the parser reads inline styles and attributes only (not CSS classes), ignores `<text>`, and keeps the markup in a live DOM container, so a `<style>` would leak into the page. `TechDrawing` handles all three; reuse its `prepareSvg` approach for other SVG inputs.
+- **Transitions:** `useTransition` callbacks get the context in real pixels, origin top-left, inside save/restore.
+- **Shadowed members:** don't name component members after Node members (`scale`, `draw`, `margin`, `closed` on Curves…). For example, `*draw()` would override `Node.draw(context)`.
+- **pnpm supply-chain policy:** it refuses recent versions. Pin versions older than 2 weeks; never add `minimumReleaseAgeExclude`.
 
-## Verificação visual (para o agente)
+## Visual verification
 
-- **Navegador:** o Vivaldi headless trava ao criar contexto. Use o Chromium headless do Playwright (`PLAYWRIGHT_BROWSERS_PATH`) com `launchPersistentContext`.
-- **Render:** abra `http://localhost:9000/<projeto>`, clique no botão **RENDER** e inspecione `studio/output/`. Para frames rápidos, use temporariamente o exportador *Image sequence* com fps e escala menores no `.meta` do projeto, e **restaure depois**.
+- **Browser:** drive the editor with Playwright's Chromium headless shell (`PLAYWRIGHT_BROWSERS_PATH`) and `launchPersistentContext`. Desktop browsers in headless mode can crash when creating the rendering context.
+- **Render:** open `http://localhost:9000/<project>`, click **RENDER**, and inspect `studio/output/` (extract frames with the ffmpeg bundled in `imageio-ffmpeg`).
+- **README media:** `docs/media/` is generated from showcase and preset renders. Regenerate it when a component's look changes.

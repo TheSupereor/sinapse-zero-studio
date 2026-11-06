@@ -1,49 +1,86 @@
 # synapticon-studio
 
-Estúdio de vídeos instrutivos da **Synapticon Laboratories**: explainers com motion graphics,
-narração em off e humor seco, feitos em código com o [Canvas Commons](https://canvascommons.io)
-(fork comunitário do Motion Canvas) e editados à mão no editor visual dele.
+**A code-first studio for narrated technical explainer videos**, built on [Canvas Commons](https://canvascommons.io), the community fork of Motion Canvas. It provides a component library, episode templates and transitions, plus a workflow where animation is written in TypeScript and timing is edited visually against the narration.
 
-## Começar
+![A FreeCAD drawing plotting itself on an engineering sheet](docs/media/interstitial.gif)
 
-```powershell
+I use it to produce an electronics training series. This repository is the framework; the episodes made with it live in a private repository ([why](docs/adr/0004-public-framework-private-episodes.md)).
+
+![Showcase frames: opening title, visual basics, a live circuit, chart and oscilloscope, the drawing interstitial in both themes](docs/media/gallery.png)
+
+## Highlights
+
+- **CAD drawings that plot themselves.** `TechDrawing` takes an SVG exported from FreeCAD TechDraw and animates it stroke by stroke, with a pen tip following the line.
+  - **Styles:** exports style lines with CSS classes, which the engine's SVG parser ignores, so styles are resolved through the browser's computed styles first.
+  - **Text:** dimension text, which the parser drops, is rebuilt from each element's screen transform.
+  - **Colors:** black-on-white CAD colors are mapped onto the theme.
+  - **One signal:** every stroke hangs off a single `progress` signal, so the plot scrubs in the editor.
+- **Schematics with real pins.** Symbols declare named pins, and `pin('a')` resolves through the node's local-to-parent matrix, so wires stay attached while parts move or rotate. Current flow is drawn in `drawShape` by sampling points along the wire, so it follows any path.
+
+  ![A circuit: the switch closes, current flows, the resistor is removed, the LED burns out](docs/media/circuit.gif)
+
+- **Timing lives in the editor, not in the code.** Blocks wait on named time events (`waitUntil('switch-on')`) that appear as draggable pills on the timeline, on top of the narration waveform. The positions are stored per scene, relative to the scene start, so re-timing one scene never shifts another.
+- **Transitions for both workflows.**
+  - **Finishing in the engine:** `panelWipe` clips the incoming scene through `useTransition`.
+  - **Finishing in a video editor:** `stinger` renders as a PNG sequence with a real alpha channel:
+
+  ![Stinger frames over a checkerboard: transparent, sweeping in, fully covering, sweeping out, transparent](docs/media/stinger-alpha.png)
+
+- **Theme and language are project variables.** One episode renders in the dark `blueprint` or light `lab` theme, and with English or Brazilian Portuguese template text, without touching a scene.
+
+## Quick start
+
+```sh
+corepack enable
 pnpm install
-pnpm dev          # editor em http://localhost:9000 (use o Vivaldi)
+pnpm dev            # editor on http://localhost:9000
 ```
 
-Comece pelo **mostruário** (`/mostruario/blueprint` ou `/mostruario/laboratorio`): ele tem
-todos os componentes funcionando, com eventos que você pode arrastar.
+Open `/showcase/blueprint` for the component gallery, or `/presets/interstitial` for the drawing loading screen. Then:
 
-| Comando | O que faz |
-|---|---|
-| `pnpm dev` | Abre o editor (reinicie depois de criar um episódio) |
-| `pnpm novo bt-01-led` | Cria um episódio a partir do modelo |
-| `pnpm typecheck` | Checa os tipos de todo o workspace |
-
-## Estrutura
-
-```
-packages/brand        @synapticon/brand       paleta, temas (blueprint/laboratorio), fontes, logos, ícones
-packages/components   @synapticon/components  componentes, símbolos de eletrônica, blocos de episódio
-studio/               app do editor (Vite + Canvas Commons)
-  mostruario/         vitrine de componentes nos dois temas
-  episodios/_modelo/  esqueleto copiado por `pnpm novo`
-docs/                 fluxo manual, componentes, tom de voz, formato de roteiro, ADRs
-tools/  manim/        reservados para automação e ponte com Manim (opcionais, ainda vazios)
+```sh
+pnpm new my-first-episode    # restart pnpm dev, open /episodes/my-first-episode/my-first-episode
 ```
 
-## Leia
+Requires Node 20.19+ and a Chromium-based browser (the MP4 exporter uses WebCodecs).
 
-1. [Fluxo manual](docs/fluxo-manual.md): do áudio ao MP4, tudo no editor.
-2. [Componentes](docs/componentes.md): referência rápida.
-3. [Tom de voz](docs/tom-de-voz.md): o humor do laboratório e o que é proibido.
-4. [Formato do roteiro](docs/roteiro-formato.md).
-5. Decisões: [sem fork](docs/adr/0001-canvas-commons-sem-fork.md) ·
-   [automação opcional](docs/adr/0002-automacao-opcional.md) ·
-   [Manim depois](docs/adr/0003-ponte-manim.md).
+## Layout
 
-## Licenças
+```
+packages/brand        @synapticon/brand       color tokens, two themes, typography, logos and icons
+packages/components   @synapticon/components  components, schematic symbols, episode blocks, transitions
+studio/               the editor app (Vite + Canvas Commons)
+  showcase/           every component, in both themes
+  presets/            transitions rendered on their own for a video editor
+  template/           the episode skeleton copied by `pnpm new`
+  episodes/           your episodes (git-ignored)
+scripts/              `pnpm new`
+docs/                 guide, component reference, voice and tone, script format, ADRs
+```
 
-- **Código:** o nosso é privado; o Canvas Commons é MIT.
-- **Fontes:** Bahnschrift, Segoe UI e Consolas são do Windows. São carregadas do sistema e não são versionadas.
-- **Marca:** logos e ícones em `packages/brand/assets` são da Synapticon.
+Internal packages have no build step: their `exports` point at TypeScript sources and the studio's Vite compiles them.
+
+## Documentation
+
+- **[Guide](docs/guide.md):** setup, creating and editing episodes, syncing to narration, writing presets and transitions, FreeCAD drawings, exporting for a video editor.
+- **[Components](docs/components.md):** API reference.
+- **[Voice and tone](docs/voice-and-tone.md):** the series' dry, institutional humor, and its limits.
+- **[Script format](docs/script-format.md):** A/V scripts with sync markers.
+- **[Roadmap](ROADMAP.md):** the production pipeline, milestones and decision log.
+
+## Design decisions
+
+1. [Canvas Commons as a pinned dependency, not a fork](docs/adr/0001-canvas-commons-without-fork.md)
+2. [Manual first, automation as an option](docs/adr/0002-optional-automation.md)
+3. [Manim later, as a video bridge](docs/adr/0003-manim-bridge.md)
+4. [Public framework, private episodes](docs/adr/0004-public-framework-private-episodes.md)
+
+## Built with
+
+[Canvas Commons](https://canvascommons.io) 0.4 · TypeScript 5.9 · Vite 8 · pnpm workspaces · WebCodecs
+
+## License
+
+- **Code:** [MIT](LICENSE).
+- **Brand assets:** the logos, icons and ornaments in `packages/brand/assets` are Synapticon trademarks and are not covered by the license ([NOTICE](packages/brand/assets/NOTICE.md)).
+- **Fonts:** Bahnschrift, Segoe UI and Consolas are loaded from the system and not redistributed.
