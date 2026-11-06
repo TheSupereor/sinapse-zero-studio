@@ -1,0 +1,28 @@
+{
+  "name": "@synapticon/three",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "3D models as technical line art inside Canvas Commons: glTF from CAD, exploded views, camera moves.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@synapticon/brand": "workspace:*",
+    "three": "0.186.1"
+  },
+  "peerDependencies": {
+    "@canvas-commons/2d": "0.4.0",
+    "@canvas-commons/core": "0.4.0"
+  },
+  "devDependencies": {
+    "@canvas-commons/2d": "0.4.0",
+    "@canvas-commons/core": "0.4.0",
+    "@types/three": "0.186.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
+  }
+}

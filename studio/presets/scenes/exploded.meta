@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "see-through",
+      "targetTime": 1.5
+    },
+    {
+      "name": "explode",
+      "targetTime": 3.2
+    },
+    {
+      "name": "assemble",
+      "targetTime": 8.6
+    }
+  ],
+  "seed": 3326618525
+}
