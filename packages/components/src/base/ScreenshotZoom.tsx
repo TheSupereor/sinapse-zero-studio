@@ -1,6 +1,6 @@
 import {Img, Node, Rect, RectProps} from '@canvas-commons/2d';
 import {all, createRef, easeInOutCubic, ThreadGenerator, Vector2} from '@canvas-commons/core';
-import {useTheme} from '@synapticon/brand';
+import {useTheme} from '@sinapse-zero/brand';
 import {HighlightBar} from './Highlight';
 
 /** A region of the image, in pixels of the original file (measure it in any image editor). */

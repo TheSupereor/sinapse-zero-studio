@@ -1,7 +1,7 @@
 import {makeScene2D} from '@canvas-commons/2d';
 import {all, createRef, waitFor, waitUntil} from '@canvas-commons/core';
-import {Background, Callout} from '@synapticon/components';
-import {ModelView} from '@synapticon/three';
+import {Background, Callout} from '@sinapse-zero/components';
+import {ModelView} from '@sinapse-zero/three';
 import excavator from '../models/excavator.glb?url';
 
 /*

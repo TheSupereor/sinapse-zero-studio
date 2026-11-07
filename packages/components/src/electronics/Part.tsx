@@ -1,6 +1,6 @@
 import {Node, NodeProps, Txt} from '@canvas-commons/2d';
 import {PossibleVector2, Vector2} from '@canvas-commons/core';
-import {fonts, sizes, Theme, useTheme} from '@synapticon/brand';
+import {fonts, sizes, Theme, useTheme} from '@sinapse-zero/brand';
 
 export interface PartProps extends NodeProps {
   /** Label above the symbol. E.g. 'R1 330 Ω'. */

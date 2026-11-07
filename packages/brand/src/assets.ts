@@ -1,6 +1,6 @@
 /**
  * Brand assets. Icons and ornaments are imported as SVG text so they can be recolored.
- * These files are Synapticon Labs trademarks and are not covered by the MIT license (see NOTICE.md).
+ * These files belong to the Sinapse Zero brand and are not covered by the MIT license (see NOTICE.md).
  */
 
 const logos = import.meta.glob<string>('../assets/logo/*.png', {

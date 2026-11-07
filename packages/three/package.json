@@ -1,5 +1,5 @@
 {
-  "name": "@synapticon/three",
+  "name": "@sinapse-zero/three",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@synapticon/brand": "workspace:*",
+    "@sinapse-zero/brand": "workspace:*",
     "three": "0.186.1"
   },
   "peerDependencies": {

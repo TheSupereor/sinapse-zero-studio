@@ -1,6 +1,6 @@
 # Components
 
-Import components from `@synapticon/components` and tokens from `@synapticon/brand`. Every component has a working example in `studio/showcase/scenes/`.
+Import components from `@sinapse-zero/components` and tokens from `@sinapse-zero/brand`. Every component has a working example in `studio/showcase/scenes/`.
 
 The pattern is always the same:
 1. the component is created **still or invisible**;
@@ -94,7 +94,7 @@ Writing your own: [guide § 8](guide.md#8-presets-and-transitions).
 
 ## 3D (spike)
 
-`ModelView` comes from `@synapticon/three`, a separate package so the 2D library stays free of three.js. It draws a glTF assembly as technical line art and explodes it.
+`ModelView` comes from `@sinapse-zero/three`, a separate package so the 2D library stays free of three.js. It draws a glTF assembly as technical line art and explodes it.
 
 | Member | Default | |
 |---|---|---|

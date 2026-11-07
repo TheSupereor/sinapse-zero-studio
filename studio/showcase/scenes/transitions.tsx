@@ -1,6 +1,6 @@
 import {makeScene2D} from '@canvas-commons/2d';
 import {waitFor} from '@canvas-commons/core';
-import {Background, drawingInterstitial, panelWipe} from '@synapticon/components';
+import {Background, drawingInterstitial, panelWipe} from '@sinapse-zero/components';
 import bracket from '../../presets/drawings/led-bracket.svg?raw';
 
 // Showcase 4: a scene transition (panelWipe) into the drawing interstitial.

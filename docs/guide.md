@@ -109,7 +109,7 @@ A scene, annotated:
 ```tsx
 import {makeScene2D} from '@canvas-commons/2d';
 import {all, createRef, waitUntil} from '@canvas-commons/core';
-import {Background, Battery, LED, Wire, appear} from '@synapticon/components';
+import {Background, Battery, LED, Wire, appear} from '@sinapse-zero/components';
 
 export default makeScene2D(function* (view) {
   // 1. Build the frame. Refs let you reach nodes later.
@@ -201,7 +201,7 @@ Every block follows the same four steps. Here is a minimal "warning banner":
 // packages/components/src/templates/warning.tsx
 import {Rect, Txt, View2D} from '@canvas-commons/2d';
 import {createRef, ThreadGenerator, waitUntil} from '@canvas-commons/core';
-import {fonts, sizes, useTheme} from '@synapticon/brand';
+import {fonts, sizes, useTheme} from '@sinapse-zero/brand';
 import {appear, pace, vanish} from '../timing';
 
 export interface WarningOptions {
@@ -341,7 +341,7 @@ yield* d().plot(4);
 
 ## 10. Exploded views from FreeCAD (3D)
 
-`ModelView`, in the package `@synapticon/three`, draws a 3D assembly as a technical line drawing and explodes it. The explosion, the camera and the line styles are signals: they animate, scrub in the editor and wait on time events like everything else. `studio/presets/exploded` is a working example; open it at `/presets/exploded`.
+`ModelView`, in the package `@sinapse-zero/three`, draws a 3D assembly as a technical line drawing and explodes it. The explosion, the camera and the line styles are signals: they animate, scrub in the editor and wait on time events like everything else. `studio/presets/exploded` is a working example; open it at `/presets/exploded`.
 
 > **Status: spike.** The API may still change. The example model is not in git, because it is FreeCAD's data: run `pnpm model:example` once to generate it.
 
@@ -368,7 +368,7 @@ Tips:
 ### Using it in a scene
 
 ```tsx
-import {ModelView} from '@synapticon/three';
+import {ModelView} from '@sinapse-zero/three';
 import arm from '../models/arm.glb?url';
 
 const model = createRef<ModelView>();

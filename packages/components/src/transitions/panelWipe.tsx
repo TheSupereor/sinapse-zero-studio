@@ -6,7 +6,7 @@ import {
   TimingFunction,
   useTransition,
 } from '@canvas-commons/core';
-import {useTheme} from '@synapticon/brand';
+import {useTheme} from '@sinapse-zero/brand';
 
 /** Where the moving edge travels to. 'left' = the new scene comes in from the right. */
 export type WipeDirection = 'left' | 'right' | 'up' | 'down';

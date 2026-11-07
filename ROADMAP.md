@@ -87,7 +87,7 @@ The reference structure matches the lesson format of the BT training texts:
   - one editor serves many projects;
   - Bahnschrift renders;
   - the MP4 export includes audio.
-- [x] **M1: brand** (2026-11-05). Palette, `blueprint`/`lab` themes, typography, logos and icons from the Synapticon kit.
+- [x] **M1: brand** (2026-11-05). Palette, `blueprint`/`lab` themes, typography, logos and icons from the Sinapse Zero kit.
 - [x] **M2: visual components** (2026-11-05). Background, Callout, highlights, Announcer (SYS//A), StatCard, Chart, ScreenshotZoom.
 - [x] **M3: electronics** (2026-11-05). Schematic symbols with named pins, Wire with animated current, Oscilloscope.
 - [x] **M4: episode templates** (2026-11-05). Opening, chapter, recap and closing blocks, the episode template and `pnpm new`. Sync is manual; Whisper was moved to "later" (§ 6).
@@ -146,5 +146,6 @@ The reference structure matches the lesson format of the BT training texts:
 | 2026-11-05 | Repository in **English** and public; **episodes private** | Open to an international audience; the framework is shared, the content is not ([ADR-0004](docs/adr/0004-public-framework-private-episodes.md)) |
 | 2026-11-05 | Export: **MP4** for opaque clips, **PNG + alpha** for overlays and Resolve masters | H.264 has no alpha ([guide § 11](docs/guide.md#11-exporting)) |
 | 2026-11-05 | Scripts and episodes are written **on request only** | The author keeps control of the content |
-| 2026-11-06 | 3D exploded views with **three.js inside Canvas Commons**, in a separate package (`@synapticon/three`) | Keeps timing editable and synced to narration. Blender + Freestyle stays the fallback for hero shots |
+| 2026-11-06 | 3D exploded views with **three.js inside Canvas Commons**, in a separate package (`@sinapse-zero/three`) | Keeps timing editable and synced to narration. Blender + Freestyle stays the fallback for hero shots |
 | 2026-11-06 | 3D line art from **mesh edges**, not screen-space edge detection; default look **see-through, hidden lines dashed** | Parts read as wireframe drawings, without walls. Geometric edges can be drawn behind surfaces and dashed, which screen-space edges cannot |
+| 2026-11-06 | Project renamed **Sinapse Zero** (formerly Synapticon) | The old name is a registered trademark of a company in the same field; a distinct name avoids confusion. The wordmark is set in Orbitron (OFL) |

@@ -10,9 +10,9 @@
   "dependencies": {
     "@canvas-commons/2d": "0.4.0",
     "@canvas-commons/core": "0.4.0",
-    "@synapticon/brand": "workspace:*",
-    "@synapticon/components": "workspace:*",
-    "@synapticon/three": "workspace:*"
+    "@sinapse-zero/brand": "workspace:*",
+    "@sinapse-zero/components": "workspace:*",
+    "@sinapse-zero/three": "workspace:*"
   },
   "devDependencies": {
     "@canvas-commons/editor": "0.4.0",

@@ -183,7 +183,7 @@ importers:
 
   packages/components:
     dependencies:
-      '@synapticon/brand':
+      '@sinapse-zero/brand':
         specifier: workspace:*
         version: link:../brand
     devDependencies:
@@ -202,7 +202,7 @@ importers:
 
   packages/three:
     dependencies:
-      '@synapticon/brand':
+      '@sinapse-zero/brand':
         specifier: workspace:*
         version: link:../brand
       three:
@@ -233,13 +233,13 @@ importers:
       '@canvas-commons/core':
         specifier: 0.4.0
         version: 0.4.0
-      '@synapticon/brand':
+      '@sinapse-zero/brand':
         specifier: workspace:*
         version: link:../packages/brand
-      '@synapticon/components':
+      '@sinapse-zero/components':
         specifier: workspace:*
         version: link:../packages/components
-      '@synapticon/three':
+      '@sinapse-zero/three':
         specifier: workspace:*
         version: link:../packages/three
     devDependencies:

@@ -1,6 +1,6 @@
 import {Rect, RectProps} from '@canvas-commons/2d';
 import {easeInOutCubic, ThreadGenerator} from '@canvas-commons/core';
-import {useTheme} from '@synapticon/brand';
+import {useTheme} from '@sinapse-zero/brand';
 
 export interface HighlightBarProps extends RectProps {
   /** Final width of the highlight. */

@@ -9,7 +9,7 @@ import {
   TimingFunction,
   Vector2,
 } from '@canvas-commons/core';
-import {fonts, sizes, useTheme} from '@synapticon/brand';
+import {fonts, sizes, useTheme} from '@sinapse-zero/brand';
 
 export interface ChartProps extends NodeProps {
   /** Width of the plot area, in px. Default: 900. */

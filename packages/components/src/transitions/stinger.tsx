@@ -7,7 +7,7 @@ import {
   ThreadGenerator,
   waitFor,
 } from '@canvas-commons/core';
-import {fonts, logo, sizes, useTheme, weights} from '@synapticon/brand';
+import {fonts, logo, sizes, useTheme, weights} from '@sinapse-zero/brand';
 import {WipeDirection} from './panelWipe';
 
 export interface StingerOptions {

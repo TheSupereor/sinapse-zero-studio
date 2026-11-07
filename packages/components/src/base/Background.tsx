@@ -1,6 +1,6 @@
 import {Grid, Rect, RectProps} from '@canvas-commons/2d';
 import {createRef, easeInOutCubic, ThreadGenerator, useScene} from '@canvas-commons/core';
-import {useTheme} from '@synapticon/brand';
+import {useTheme} from '@sinapse-zero/brand';
 
 export interface BackgroundProps extends RectProps {
   /** Show the drafting grid. Default: true. */

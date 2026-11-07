@@ -1,6 +1,6 @@
 import {Img, ImgProps, SVG, SVGProps} from '@canvas-commons/2d';
 import {useScene} from '@canvas-commons/core';
-import {iconSvg, IconName, logo, LogoVariant, useTheme} from '@synapticon/brand';
+import {iconSvg, IconName, logo, LogoVariant, useTheme} from '@sinapse-zero/brand';
 
 export type Corner = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
@@ -14,7 +14,7 @@ export interface LogoMarkProps extends ImgProps {
 }
 
 /**
- * A discreet Synapticon logo in a corner of the frame.
+ * A discreet Sinapse Zero logo in a corner of the frame.
  *
  * ```tsx
  * view.add(<LogoMark />);
@@ -44,7 +44,7 @@ export interface BrandIconProps extends Omit<SVGProps, 'svg'> {
 }
 
 /**
- * A pictogram from the Synapticon kit (battery, voltage, soldering...), recolored.
+ * A pictogram from the Sinapse Zero kit (battery, voltage, soldering...), recolored.
  *
  * ```tsx
  * <BrandIcon icon={'voltage'} size={120} />

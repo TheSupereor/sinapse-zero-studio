@@ -1,6 +1,6 @@
 import {makeScene2D} from '@canvas-commons/2d';
 import {all, createRef, waitFor, waitUntil} from '@canvas-commons/core';
-import {logo, useTheme} from '@synapticon/brand';
+import {logo, useTheme} from '@sinapse-zero/brand';
 import {
   appear,
   Background,
@@ -9,7 +9,7 @@ import {
   ScreenshotZoom,
   vanish,
   waves,
-} from '@synapticon/components';
+} from '@sinapse-zero/components';
 
 /** Approximate I–V curve of a red LED (mA as a function of V). */
 const ledCurve = (v: number) => Math.max(0, (Math.exp((v - 1.6) * 4.48) - 1) * 4);
@@ -66,8 +66,9 @@ export default makeScene2D(function* (view) {
 
   yield* waitUntil('screenshot');
   yield* appear(screenshot());
-  yield* screenshot().focus({x: 0, y: 0, w: 420, h: 400});
-  yield* screenshot().highlightRegion({x: 40, y: 300, w: 320, h: 60});
+  // Regions are in pixels of the image file: here, the name under the mark.
+  yield* screenshot().focus({x: 0, y: 880, w: 1172, h: 440});
+  yield* screenshot().highlightRegion({x: -12, y: 900, w: 1196, h: 192});
 
   yield* waitUntil('end');
   yield* screenshot().focus(null);

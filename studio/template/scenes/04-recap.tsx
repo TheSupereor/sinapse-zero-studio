@@ -1,5 +1,5 @@
 import {makeScene2D} from '@canvas-commons/2d';
-import {Background, recap} from '@synapticon/components';
+import {Background, recap} from '@sinapse-zero/components';
 
 // RECAP: tie this episode to an earlier one (not only the one right before it).
 export default makeScene2D(function* (view) {

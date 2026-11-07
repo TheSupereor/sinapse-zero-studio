@@ -1,5 +1,5 @@
 /**
- * Typography: the same families as the Synapticon PDFs, loaded from the system (Windows).
+ * Typography: the same families as the brand's PDF documents, loaded from the system (Windows).
  * Font files are not committed, because they are under the Microsoft license.
  * The fallbacks keep the layout close on macOS and Linux.
  */

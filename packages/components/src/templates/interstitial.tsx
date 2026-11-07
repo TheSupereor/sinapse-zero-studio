@@ -8,7 +8,7 @@ import {
   ThreadGenerator,
   waitUntil,
 } from '@canvas-commons/core';
-import {fonts, useTheme, weights} from '@synapticon/brand';
+import {fonts, useTheme, weights} from '@sinapse-zero/brand';
 import {TechDrawing, TechDrawingProps} from '../base/TechDrawing';
 import {useStrings} from '../strings';
 import {appear, pace} from '../timing';
@@ -156,7 +156,7 @@ export function* drawingInterstitial(view: View2D, options: DrawingInterstitialO
         {tick([thirds[1], top + block.row * 2], [thirds[1], bottom], theme.muted)}
         {tick([thirds[2], top + block.row * 2], [thirds[2], bottom], theme.muted)}
         <Txt
-          text={'SYNAPTICON LABORATORIES'}
+          text={'SINAPSE ZERO'}
           fontFamily={fonts.display}
           fontSize={26}
           fontWeight={weights.bold}

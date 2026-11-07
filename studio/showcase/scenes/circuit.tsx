@@ -12,7 +12,7 @@ import {
   Switch,
   vanish,
   Wire,
-} from '@synapticon/components';
+} from '@sinapse-zero/components';
 
 // Showcase 2: a circuit with current, a switch, an LED and the inevitable accident.
 export default makeScene2D(function* (view) {

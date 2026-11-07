@@ -6,7 +6,7 @@ import {
   ThreadGenerator,
   tween,
 } from '@canvas-commons/core';
-import {fonts, sizes, useTheme, weights} from '@synapticon/brand';
+import {fonts, sizes, useTheme, weights} from '@sinapse-zero/brand';
 
 export interface StatCardProps extends RectProps {
   /** Small all-caps line on top. E.g. 'FORWARD VOLTAGE'. */

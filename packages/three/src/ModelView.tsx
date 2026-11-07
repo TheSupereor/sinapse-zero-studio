@@ -9,7 +9,7 @@ import {
   useScene,
   Vector2,
 } from '@canvas-commons/core';
-import {useTheme} from '@synapticon/brand';
+import {useTheme} from '@sinapse-zero/brand';
 import * as THREE from 'three';
 import {GLTF, GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {buildEdges, createFillMaterial, createLineMaterial, EdgeSource, srgb} from './lines';
