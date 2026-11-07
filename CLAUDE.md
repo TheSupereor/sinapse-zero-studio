@@ -19,8 +19,10 @@ sinapse-zero-studio is a pnpm monorepo for narrated explainer videos (the Sinaps
 ## Commands
 
 ```
-pnpm install | pnpm dev | pnpm typecheck | pnpm new <id> [--locale en|pt-BR] [--theme blueprint|lab]
+pnpm install | pnpm dev | pnpm typecheck | pnpm build | pnpm demo | pnpm new <id> [--locale en|pt-BR] [--theme blueprint|lab]
 ```
+
+CI (`.github/workflows/ci.yml`) runs `typecheck`, `build` and `build:demo` on a clean Linux checkout for every push and PR to `main`; run them before pushing. `pages.yml` deploys the demo on every push to `main`.
 
 ## Map
 
@@ -34,6 +36,7 @@ pnpm install | pnpm dev | pnpm typecheck | pnpm new <id> [--locale en|pt-BR] [--
 - `studio/showcase/scenes`: an example of every component. **Update it when you add a component.**
 - `studio/presets/`: standalone preset projects. `stinger.meta` exports transparent PNGs, `interstitial.meta` exports MP4; `drawings/` holds sample SVGs.
 - `studio/template/`: copied by `pnpm new` into `studio/episodes/<id>/`. The project file name = the exported file name.
+- `studio/demo/` + `studio/vite.demo.config.ts`: the live demo page (GitHub Pages). The config lists the projects it builds; the page plays each with `<canvas-commons-player>` and takes its colors and font stacks from the brand package.
 
 ## Gotchas (Canvas Commons ≠ Motion Canvas 3)
 
@@ -47,6 +50,11 @@ pnpm install | pnpm dev | pnpm typecheck | pnpm new <id> [--locale en|pt-BR] [--
 - **SVG parsing:** the parser reads inline styles and attributes only (not CSS classes), ignores `<text>`, and keeps the markup in a live DOM container, so a `<style>` would leak into the page. `TechDrawing` handles all three; reuse its `prepareSvg` approach for other SVG inputs.
 - **Transitions:** `useTransition` callbacks get the context in real pixels, origin top-left, inside save/restore.
 - **Shadowed members:** don't name component members after Node members (`scale`, `draw`, `margin`, `closed` on Curves…). For example, `*draw()` would override `Node.draw(context)`.
+- **Player (`@canvas-commons/player`):**
+  - **Variables:** the element replaces the project's variables with its `variables` attribute, `{}` when the attribute is missing, so theme and locale fall back to defaults. `demo/main.ts` imports the project first and passes `project.variables`.
+  - **Settings before load:** setting `quality`, `width` or `height` before the project loads throws, because they are read from the project. Set them once `state` is `ready`.
+  - **Fonts:** canvas text is laid out with the fonts available when a node is built, so web fonts must finish loading before `src` is set.
+- **Linux CI:** the checkout is case-sensitive and holds only committed files; a git-ignored asset imported by a built project breaks the build.
 - **pnpm supply-chain policy:** it refuses recent versions. Pin versions older than 2 weeks; never add `minimumReleaseAgeExclude`.
 
 ## Visual verification

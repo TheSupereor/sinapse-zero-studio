@@ -1,8 +1,12 @@
 # sinapse-zero-studio
 
+[![CI](https://github.com/TheSupereor/sinapse-zero-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/TheSupereor/sinapse-zero-studio/actions/workflows/ci.yml)
+
 **A code-first studio for narrated technical explainer videos**, built on [Canvas Commons](https://canvascommons.io), the community fork of Motion Canvas. It provides a component library, episode templates and transitions, plus a workflow where animation is written in TypeScript and timing is edited visually against the narration.
 
 ![A FreeCAD drawing plotting itself on an engineering sheet](docs/media/interstitial.gif)
+
+**[Live demo](https://thesupereor.github.io/sinapse-zero-studio/):** the showcase in both themes and the drawing interstitial, running in your browser instead of as video files.
 
 I use it to produce an electronics training series. This repository is the framework; the episodes made with it live in a private repository ([why](docs/adr/0004-public-framework-private-episodes.md)).
 
@@ -31,9 +35,9 @@ I use it to produce an electronics training series. This repository is the frame
 ## Quick start
 
 ```sh
-corepack enable
 pnpm install
 pnpm dev            # editor on http://localhost:9000
+pnpm demo           # the live demo page, built and served on http://localhost:4173
 ```
 
 Open `/showcase/blueprint` for the component gallery, or `/presets/interstitial` for the drawing loading screen. Then:
@@ -42,7 +46,7 @@ Open `/showcase/blueprint` for the component gallery, or `/presets/interstitial`
 pnpm new my-first-episode    # restart pnpm dev, open /episodes/my-first-episode/my-first-episode
 ```
 
-Requires Node 20.19+ and a Chromium-based browser (the MP4 exporter uses WebCodecs).
+Requires Node 20.19+, [pnpm](https://pnpm.io/installation) 12 and a Chromium-based browser (the MP4 exporter uses WebCodecs).
 
 ## Layout
 
@@ -54,7 +58,9 @@ studio/               the editor app (Vite + Canvas Commons)
   presets/            transitions rendered on their own for a video editor
   template/           the episode skeleton copied by `pnpm new`
   episodes/           your episodes (git-ignored)
+  demo/               the live demo page, published to GitHub Pages
 scripts/              `pnpm new`
+.github/workflows/    CI (typecheck and builds) and the Pages deployment
 docs/                 guide, component reference, voice and tone, script format, ADRs
 ```
 
@@ -62,7 +68,7 @@ Internal packages have no build step: their `exports` point at TypeScript source
 
 ## Documentation
 
-- **[Guide](docs/guide.md):** setup, creating and editing episodes, syncing to narration, writing presets and transitions, FreeCAD drawings, exporting for a video editor.
+- **[Guide](docs/guide.md):** setup, creating and editing episodes, syncing to narration, writing presets and transitions, FreeCAD drawings, exporting for a video editor, the live demo.
 - **[Components](docs/components.md):** API reference.
 - **[Voice and tone](docs/voice-and-tone.md):** the series' dry, institutional humor, and its limits.
 - **[Script format](docs/script-format.md):** A/V scripts with sync markers.
@@ -83,4 +89,4 @@ Internal packages have no build step: their `exports` point at TypeScript source
 
 - **Code:** [MIT](LICENSE).
 - **Brand assets:** the logos, icons and ornaments in `packages/brand/assets` belong to the Sinapse Zero brand and are not covered by the license ([NOTICE](packages/brand/assets/NOTICE.md)).
-- **Fonts:** Bahnschrift, Segoe UI and Consolas are loaded from the system and not redistributed.
+- **Fonts:** Bahnschrift, Segoe UI and Consolas are loaded from the system and not redistributed. For other systems, the live demo serves open stand-ins under the SIL Open Font License: Barlow, Selawik and Cascadia Mono.

@@ -9,7 +9,7 @@ From the first components to a published training series. This file is the proje
 - **agent:** code, docs and verification, by an AI coding agent at the author's request;
 - **both:** shared work.
 
-*Last updated: 2026-11-06.*
+*Last updated: 2026-11-07.*
 
 ---
 
@@ -100,10 +100,13 @@ The reference structure matches the lesson format of the BT training texts:
   - `en`/`pt-BR` locales.
 
 - [x] **Published on GitHub** (2026-11-06). The 3D spike lives on the `spike/exploded-views` branch until it graduates.
+- [x] **CI and live demo** (2026-11-07).
+  - **CI:** GitHub Actions runs `typecheck`, `build` and `build:demo` on every push and PR to `main`.
+  - **Live demo:** `studio/demo` plays the showcase in both themes and the drawing interstitial in the browser with `<canvas-commons-player>`. It deploys to GitHub Pages on every push to `main` ([guide](docs/guide.md#live-demo-on-the-web)).
 
 ### Next
 
-- [ ] **Private episodes repository** (author). `cd studio/episodes && git init`, with a private remote.
+- [ ] **Private episodes repository** (author). Done: `git init` in `studio/episodes` and a private GitHub repository. Left: add the remote and push the first episode.
 - [ ] **First FreeCAD drawings** for interstitials (author). Export with TechDraw › Export Page as SVG, into `studio/presets/drawings/` or the episode's `images/`.
 - [ ] **Pilot: BT-01 LED, about 90 s** (both, when the author schedules it).
   - Rewrite the script in two columns.
@@ -117,6 +120,7 @@ The reference structure matches the lesson format of the BT training texts:
 - [ ] **More presets** (agent). A lower third, an iris transition (the code is already in [guide § 8.2](docs/guide.md#82-writing-a-scene-transition)), a chapter stinger with a code label.
 - [ ] **Manim bridge** (agent). A `ManimClip` for heavy 3D or math scenes ([ADR-0003](docs/adr/0003-manim-bridge.md)).
 - [ ] **Project mascot** (author). Only if SYS//A isn't enough; it must be an original design.
+- [ ] **Render smoke test in CI** (agent). Headless Chromium renders a few showcase frames and fails on errors or blank frames.
 
 ## 6. Decision log
 
@@ -132,3 +136,5 @@ The reference structure matches the lesson format of the BT training texts:
 | 2026-11-05 | Export: **MP4** for opaque clips, **PNG + alpha** for overlays and Resolve masters | H.264 has no alpha ([guide § 10](docs/guide.md#10-exporting)) |
 | 2026-11-05 | Scripts and episodes are written **on request only** | The author keeps control of the content |
 | 2026-11-06 | Project renamed **Sinapse Zero** (formerly Synapticon) | The old name is a registered trademark of a company in the same field; a distinct name avoids confusion. The wordmark is set in Orbitron (OFL) |
+| 2026-11-07 | **CI on GitHub Actions**: typecheck and builds, no rendering | Fast and free on a public repository; a render smoke test can come later |
+| 2026-11-07 | **Live demo** of real projects with `<canvas-commons-player>` on GitHub Pages | Shows that the animations are code, not video files. The Windows fonts can't be redistributed, so the page loads OFL stand-ins for other systems: Barlow, Selawik, Cascadia Mono |
