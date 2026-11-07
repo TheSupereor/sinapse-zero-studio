@@ -9,7 +9,7 @@ import {
   tween,
   waitFor,
 } from '@canvas-commons/core';
-import {fonts, sizes, useTheme} from '@synapticon/brand';
+import {fonts, sizes, useTheme} from '@sinapse-zero/brand';
 
 /** Typing speed, in characters per second. Deadpan is never in a hurry. */
 const CPS = 28;

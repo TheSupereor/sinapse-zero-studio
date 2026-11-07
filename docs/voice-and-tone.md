@@ -1,4 +1,4 @@
-# Voice and tone: Synapticon Laboratories
+# Voice and tone: Sinapse Zero
 
 The training is run by a scientific institution that takes safety very seriously, and the intern less so. The humor is **dry, sarcastic and self-aware**, in the register of Valve's *Portal* and *Half-Life*: institutional calm in the face of disaster.
 

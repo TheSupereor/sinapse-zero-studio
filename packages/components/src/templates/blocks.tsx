@@ -8,7 +8,7 @@ import {
   waitFor,
   waitUntil,
 } from '@canvas-commons/core';
-import {fonts, logo, sizes, useTheme, weights} from '@synapticon/brand';
+import {fonts, logo, sizes, useTheme, weights} from '@sinapse-zero/brand';
 import {Announcer} from '../base/Announcer';
 import {HighlightBox} from '../base/Highlight';
 import {useStrings} from '../strings';
@@ -33,7 +33,7 @@ export interface OpeningOptions {
   /** Training code. E.g. 'BT-01'. */
   code: string;
   title: string;
-  /** Line above the code. Default: localized 'SYNAPTICON LABORATORIES · BASIC TRAINING'. */
+  /** Line above the code. Default: localized 'SINAPSE ZERO · BASIC TRAINING'. */
   overline?: string;
   /** Exit event. Default: 'opening-out'. */
   event?: string;

@@ -1,5 +1,5 @@
 /**
- * Color tokens of the Synapticon "Alfa" identity, sampled from the channel banner.
+ * Color tokens of the Sinapse Zero identity, sampled from the channel banner.
  * Components never read these directly: they ask the theme (see `themes.ts`).
  */
 export const palette = {

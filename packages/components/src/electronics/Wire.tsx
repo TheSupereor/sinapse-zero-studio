@@ -7,7 +7,7 @@ import {
   SimpleSignal,
   ThreadGenerator,
 } from '@canvas-commons/core';
-import {useTheme} from '@synapticon/brand';
+import {useTheme} from '@sinapse-zero/brand';
 
 export interface WireProps extends LineProps {
   /** Visibility of the current dots, 0–1. Default: 0 (no current). */

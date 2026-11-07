@@ -1,6 +1,6 @@
 import {Grid, initial, Line, Rect, RectProps, signal, Txt} from '@canvas-commons/2d';
 import {SimpleSignal} from '@canvas-commons/core';
-import {fonts, sizes, useTheme} from '@synapticon/brand';
+import {fonts, sizes, useTheme} from '@sinapse-zero/brand';
 
 /** A waveform: takes x ∈ [0, 1] (screen width) and t (s); returns −1…1. */
 export type Waveform = (x: number, t: number) => number;

@@ -12,7 +12,7 @@ import {
   useRandom,
   Vector2,
 } from '@canvas-commons/core';
-import {fonts, sizes} from '@synapticon/brand';
+import {fonts, sizes} from '@sinapse-zero/brand';
 import {Part, PartProps} from './Part';
 
 /*

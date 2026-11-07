@@ -18,7 +18,7 @@ import {
   Vector2,
   Vector2Signal,
 } from '@canvas-commons/core';
-import {fonts, sizes, useTheme} from '@synapticon/brand';
+import {fonts, sizes, useTheme} from '@sinapse-zero/brand';
 
 export interface CalloutProps extends NodeProps {
   /** The point being labeled, in the parent's space. Can be a function: `() => led().pin('a')`. */

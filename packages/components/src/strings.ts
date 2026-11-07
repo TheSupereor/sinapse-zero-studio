@@ -25,7 +25,7 @@ export interface Strings {
 
 export const strings: Record<Locale, Strings> = {
   en: {
-    openingOverline: 'SYNAPTICON LABORATORIES · BASIC TRAINING',
+    openingOverline: 'SINAPSE ZERO · BASIC TRAINING',
     recapLabel: code => `RECAP · FILE ${code}`,
     closingLines: code => [`Basic training ${code} complete.`, 'Proceed to the next module.'],
     next: 'NEXT',
@@ -45,7 +45,7 @@ export const strings: Record<Locale, Strings> = {
     },
   },
   'pt-BR': {
-    openingOverline: 'SYNAPTICON LABORATORIES · TREINAMENTO BÁSICO',
+    openingOverline: 'SINAPSE ZERO · TREINAMENTO BÁSICO',
     recapLabel: code => `RETOMADA · ARQUIVO ${code}`,
     closingLines: code => [`Treinamento básico ${code} completo.`, 'Prossiga para o próximo módulo.'],
     next: 'PRÓXIMO',

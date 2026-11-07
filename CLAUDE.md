@@ -2,7 +2,7 @@
 
 Guidance for AI coding agents working in this repository; Claude Code loads it automatically. People should start with the [README](README.md) and the [guide](docs/guide.md).
 
-synapticon-studio is a pnpm monorepo for narrated explainer videos (the Synapticon Laboratories BT training series), built on **Canvas Commons 0.4.0**, the community fork of Motion Canvas. Code and docs are in English; the episodes are narrated in Brazilian Portuguese (`locale: 'pt-BR'`).
+sinapse-zero-studio is a pnpm monorepo for narrated explainer videos (the Sinapse Zero BT training series), built on **Canvas Commons 0.4.0**, the community fork of Motion Canvas. Code and docs are in English; the episodes are narrated in Brazilian Portuguese (`locale: 'pt-BR'`).
 
 **Start with `ROADMAP.md`**, the project tracker: the production pipeline, milestones with owners, and the decision log. Tick an item with the date when it is done, and log every decision that changes the plan.
 

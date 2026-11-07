@@ -1,6 +1,6 @@
 # Components
 
-Import components from `@synapticon/components` and tokens from `@synapticon/brand`. Every component has a working example in `studio/showcase/scenes/`.
+Import components from `@sinapse-zero/components` and tokens from `@sinapse-zero/brand`. Every component has a working example in `studio/showcase/scenes/`.
 
 The pattern is always the same:
 1. the component is created **still or invisible**;

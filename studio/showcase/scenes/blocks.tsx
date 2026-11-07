@@ -1,6 +1,6 @@
 import {makeScene2D} from '@canvas-commons/2d';
 import {waitFor} from '@canvas-commons/core';
-import {Background, chapter, closing, opening, recap} from '@synapticon/components';
+import {Background, chapter, closing, opening, recap} from '@sinapse-zero/components';
 
 // Showcase 0: the episode structure blocks, in order.
 export default makeScene2D(function* (view) {

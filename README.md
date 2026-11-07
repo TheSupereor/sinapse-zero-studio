@@ -1,4 +1,4 @@
-# synapticon-studio
+# sinapse-zero-studio
 
 **A code-first studio for narrated technical explainer videos**, built on [Canvas Commons](https://canvascommons.io), the community fork of Motion Canvas. It provides a component library, episode templates and transitions, plus a workflow where animation is written in TypeScript and timing is edited visually against the narration.
 
@@ -47,8 +47,8 @@ Requires Node 20.19+ and a Chromium-based browser (the MP4 exporter uses WebCode
 ## Layout
 
 ```
-packages/brand        @synapticon/brand       color tokens, two themes, typography, logos and icons
-packages/components   @synapticon/components  components, schematic symbols, episode blocks, transitions
+packages/brand        @sinapse-zero/brand       color tokens, two themes, typography, logos and icons
+packages/components   @sinapse-zero/components  components, schematic symbols, episode blocks, transitions
 studio/               the editor app (Vite + Canvas Commons)
   showcase/           every component, in both themes
   presets/            transitions rendered on their own for a video editor
@@ -82,5 +82,5 @@ Internal packages have no build step: their `exports` point at TypeScript source
 ## License
 
 - **Code:** [MIT](LICENSE).
-- **Brand assets:** the logos, icons and ornaments in `packages/brand/assets` are Synapticon trademarks and are not covered by the license ([NOTICE](packages/brand/assets/NOTICE.md)).
+- **Brand assets:** the logos, icons and ornaments in `packages/brand/assets` belong to the Sinapse Zero brand and are not covered by the license ([NOTICE](packages/brand/assets/NOTICE.md)).
 - **Fonts:** Bahnschrift, Segoe UI and Consolas are loaded from the system and not redistributed.

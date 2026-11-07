@@ -1,6 +1,6 @@
 import {makeScene2D, Txt} from '@canvas-commons/2d';
 import {all, createRef, sequence, waitFor, waitUntil} from '@canvas-commons/core';
-import {fonts, sizes, useTheme} from '@synapticon/brand';
+import {fonts, sizes, useTheme} from '@sinapse-zero/brand';
 import {
   Announcer,
   appear,
@@ -12,7 +12,7 @@ import {
   LogoMark,
   pace,
   StatCard,
-} from '@synapticon/components';
+} from '@sinapse-zero/components';
 
 // Showcase 1: the visual basics. Drag the events on the timeline to try them.
 export default makeScene2D(function* (view) {

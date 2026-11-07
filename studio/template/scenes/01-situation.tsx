@@ -1,7 +1,7 @@
 import {makeScene2D, Txt} from '@canvas-commons/2d';
 import {createRef, waitUntil} from '@canvas-commons/core';
-import {fonts, sizes, useTheme} from '@synapticon/brand';
-import {appear, Background, vanish} from '@synapticon/components';
+import {fonts, sizes, useTheme} from '@sinapse-zero/brand';
+import {appear, Background, vanish} from '@sinapse-zero/components';
 
 /*
  * SITUATION: the cold open. Show the problem happening before explaining anything.

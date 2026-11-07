@@ -1,5 +1,5 @@
 {
-  "name": "synapticon-studio",
+  "name": "sinapse-zero-studio",
   "private": true,
   "type": "module",
   "description": "A code-first studio for narrated explainer videos, built on Canvas Commons (the community fork of Motion Canvas).",

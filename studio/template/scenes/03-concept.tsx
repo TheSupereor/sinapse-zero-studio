@@ -1,6 +1,6 @@
 import {makeScene2D} from '@canvas-commons/2d';
 import {waitUntil} from '@canvas-commons/core';
-import {Background, chapter} from '@synapticon/components';
+import {Background, chapter} from '@sinapse-zero/components';
 
 /*
  * CONCEPT: the explanation. Start with a chapter card and build the explanation from

@@ -9,7 +9,7 @@ import {
   TimingFunction,
   Vector2,
 } from '@canvas-commons/core';
-import {fonts, Theme, useTheme} from '@synapticon/brand';
+import {fonts, Theme, useTheme} from '@sinapse-zero/brand';
 
 export interface TechDrawingProps extends SVGProps {
   /** How much of the drawing is plotted, 0–1. Default: 0 (nothing yet). */

@@ -1,9 +1,9 @@
 {
-  "name": "@synapticon/brand",
+  "name": "@sinapse-zero/brand",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Synapticon identity for video: color tokens, themes, typography and assets.",
+  "description": "Sinapse Zero identity for video: color tokens, themes, typography and assets.",
   "exports": {
     ".": "./src/index.ts",
     "./assets/*": "./assets/*"

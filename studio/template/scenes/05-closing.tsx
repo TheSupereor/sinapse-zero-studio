@@ -1,5 +1,5 @@
 import {makeScene2D} from '@canvas-commons/2d';
-import {Background, closing, LogoMark} from '@synapticon/components';
+import {Background, closing, LogoMark} from '@sinapse-zero/components';
 
 // CLOSING: SYS//A declares the training complete.
 export default makeScene2D(function* (view) {
