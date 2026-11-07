@@ -1,13 +1,17 @@
 /**
  * Typography: the same families as the brand's PDF documents, loaded from the system (Windows).
  * Font files are not committed, because they are under the Microsoft license.
- * The fallbacks keep the layout close on macOS and Linux.
+ *
+ * The second name in each stack is an open (OFL) stand-in: Barlow for Bahnschrift, Selawik for
+ * Segoe UI, Cascadia Mono for Consolas. The live demo (studio/demo) loads them as web fonts, so
+ * browsers without the Windows fonts render close to the videos. Where they are not loaded,
+ * they are skipped and the system fallbacks after them apply.
  */
 export const fonts = {
   /** Titles, big numbers, technical labels. */
-  display: "Bahnschrift, 'DIN Alternate', 'Segoe UI', sans-serif",
+  display: "Bahnschrift, Barlow, 'DIN Alternate', 'Segoe UI', sans-serif",
   /** Running text, captions. */
-  body: "'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
+  body: "'Segoe UI', Selawik, 'Helvetica Neue', Arial, sans-serif",
   /** Terminal, code, the SYS//A announcer. */
   mono: "Consolas, 'Cascadia Mono', 'Courier New', monospace",
 } as const;

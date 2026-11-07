@@ -1,6 +1,6 @@
 # Guide
 
-This guide covers the whole workflow: setting up, creating and editing projects, building your own presets and transitions, technical drawings from FreeCAD, and exporting for a video editor. Everything is done by hand in the Canvas Commons editor. Automation is optional and comes later ([ADR-0002](adr/0002-optional-automation.md)).
+This guide covers the whole workflow: setting up, creating and editing projects, building your own presets and transitions, technical drawings from FreeCAD, exporting for a video editor, and publishing projects on the web. Everything is done by hand in the Canvas Commons editor. Automation is optional and comes later ([ADR-0002](adr/0002-optional-automation.md)).
 
 - [1. Setup](#1-setup)
 - [2. How Canvas Commons thinks](#2-how-canvas-commons-thinks)
@@ -20,9 +20,9 @@ This guide covers the whole workflow: setting up, creating and editing projects,
 
 **Requirements:**
 - **Node:** 20.19 or later.
-- **pnpm:** 12; `corepack enable` installs the version pinned in `package.json`.
+- **pnpm:** 12, the version pinned in `package.json` ([installation](https://pnpm.io/installation)).
 - **Browser:** a Chromium-based one (Chrome, Edge, Vivaldi…). The MP4 exporter uses WebCodecs.
-- **Fonts:** Bahnschrift, Segoe UI and Consolas ship with Windows. On macOS or Linux the fallbacks in `packages/brand/src/typography.ts` are used.
+- **Fonts:** Bahnschrift, Segoe UI and Consolas ship with Windows. On macOS or Linux the fallbacks in `packages/brand/src/typography.ts` are used; install Barlow, Selawik and Cascadia Mono (all OFL) to get the closest match.
 
 ```sh
 pnpm install
@@ -379,6 +379,23 @@ ffmpeg -framerate 30 -i output/stinger/%06d.png -c:v prores_ks -profile:v 4444 -
 - **Video quality:** "high" is the default; use "very high" for masters.
 - **Realtime encode:** encodes about twice as fast for a small size cost. Fine for reviews.
 - **Range:** in Video Settings, exports only part of the timeline. Useful to review one scene.
+
+### Live demo on the web
+
+A project can also run as itself on a web page, with no export: `<canvas-commons-player>` loads a built project and renders it in the visitor's browser. The [live demo](https://thesupereor.github.io/sinapse-zero-studio/) is built this way from `studio/demo/`, and `.github/workflows/pages.yml` publishes it to GitHub Pages on every push to `main`.
+
+```sh
+pnpm demo         # build into studio/dist-demo/ and serve it on http://localhost:4173
+```
+
+To add a project to the page:
+1. **Build it:** add its path to `projects` in `studio/vite.demo.config.ts`. It is built to `<path>.js` next to the page.
+2. **Show it:** add `<canvas-commons-player data-project="<path>"></canvas-commons-player>` to `studio/demo/index.html`, with the path minus `.ts`.
+
+Keep these limits in mind:
+- **Silent:** the player plays no audio, and it has no timeline, only play and pause.
+- **Committed files only:** the Pages build starts from a clean checkout, so a project whose assets are git-ignored (episodes, the 3D example model) fails the build.
+- **Fonts:** visitors without the Windows fonts get the open stand-ins named in `packages/brand/src/typography.ts`, which the page loads as web fonts.
 
 ## 11. Troubleshooting
 

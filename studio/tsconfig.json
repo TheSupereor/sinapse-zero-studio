@@ -3,5 +3,5 @@
   "compilerOptions": {
     "skipLibCheck": true
   },
-  "include": ["src", "showcase", "presets", "template", "episodes"]
+  "include": ["src", "showcase", "presets", "template", "episodes", "demo"]
 }

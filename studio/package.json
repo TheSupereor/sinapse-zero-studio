@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "build:demo": "tsc --noEmit && vite build --config vite.demo.config.ts",
+    "demo": "pnpm build:demo && vite preview --config vite.demo.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -15,8 +17,11 @@
   },
   "devDependencies": {
     "@canvas-commons/editor": "0.4.0",
+    "@canvas-commons/player": "0.4.0",
     "@canvas-commons/vite-plugin": "0.4.0",
     "@canvas-commons/webcodecs": "0.4.0",
+    "@fontsource/barlow": "5.3.0",
+    "@fontsource/cascadia-mono": "5.3.0",
     "typescript": "5.9.3",
     "vite": "8.3.5"
   }

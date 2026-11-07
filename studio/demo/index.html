@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sinapse Zero Studio · Live demo</title>
+    <meta
+      name="description"
+      content="Animations from sinapse-zero-studio, a code-first studio for narrated explainer videos, running live in the browser."
+    />
+    <link rel="icon" href="../../packages/brand/assets/logo/mark_light.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="../../packages/brand/assets/logo/mark_dark.png" media="(prefers-color-scheme: dark)" />
+    <script type="module" src="./main.ts"></script>
+  </head>
+  <body>
+    <header class="intro">
+      <div class="brand">
+        <img class="mark" src="../../packages/brand/assets/logo/mark_dark.png" alt="" width="830" height="775" />
+        <img class="word" src="../../packages/brand/assets/logo/word_dark.png" alt="Sinapse Zero" width="2005" height="169" />
+      </div>
+      <h1>Studio · live demo</h1>
+      <p class="lede">
+        Each animation below is a <a href="https://canvascommons.io">Canvas Commons</a> project running in your
+        browser: TypeScript drawing every frame on a canvas, not a video file.
+      </p>
+      <nav class="links">
+        <a class="button" href="https://github.com/TheSupereor/sinapse-zero-studio">Source on GitHub</a>
+        <a href="https://github.com/TheSupereor/sinapse-zero-studio/blob/main/docs/guide.md">Guide</a>
+        <a href="https://github.com/TheSupereor/sinapse-zero-studio/blob/main/docs/components.md">Components</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="demo">
+        <div class="caption">
+          <h2>Component showcase</h2>
+          <p class="tags">blueprint theme · English</p>
+          <p>
+            Episode blocks, callouts and highlights, a circuit with live current, a chart, an oscilloscope, and both
+            transition styles.
+          </p>
+        </div>
+        <canvas-commons-player data-project="showcase/blueprint"></canvas-commons-player>
+      </section>
+
+      <section class="demo">
+        <div class="caption">
+          <h2>Same scenes, other variables</h2>
+          <p class="tags">lab theme · pt-BR template text</p>
+          <p>
+            The project changes two variables and no scene code: <code>theme: 'lab'</code> recolors every component,
+            and <code>locale: 'pt-BR'</code> switches the template text (block labels, the closing line) to Brazilian
+            Portuguese.
+          </p>
+        </div>
+        <canvas-commons-player data-project="showcase/lab"></canvas-commons-player>
+      </section>
+
+      <section class="demo">
+        <div class="caption">
+          <h2>Drawing interstitial</h2>
+          <p class="tags">FreeCAD TechDraw → SVG</p>
+          <p>A drawing exported from FreeCAD plots itself stroke by stroke, driven by a single progress signal.</p>
+        </div>
+        <canvas-commons-player data-project="presets/interstitial"></canvas-commons-player>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Animations play while they are on screen and pause when you scroll away. Rendering runs on your device.
+      </p>
+      <p>
+        On Windows the text uses Bahnschrift and Segoe UI, as in the videos; other systems get open stand-ins
+        (Barlow, Selawik, Cascadia Mono).
+      </p>
+      <p>
+        Code under the <a href="https://github.com/TheSupereor/sinapse-zero-studio/blob/main/LICENSE">MIT license</a>.
+        The Sinapse Zero name and logos are not covered by it.
+      </p>
+    </footer>
+  </body>
+</html>

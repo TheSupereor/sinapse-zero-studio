@@ -1,6 +1,7 @@
 # Dependencies and build output
 node_modules
 dist
+dist-demo
 output
 
 # Your episodes are private: this repository is the framework, not the content.

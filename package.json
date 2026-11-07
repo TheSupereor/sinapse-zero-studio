@@ -12,6 +12,8 @@
   "scripts": {
     "dev": "pnpm --filter studio dev",
     "build": "pnpm --filter studio build",
+    "build:demo": "pnpm --filter studio build:demo",
+    "demo": "pnpm --filter studio demo",
     "typecheck": "pnpm -r typecheck",
     "new": "node scripts/new-episode.mjs"
   }

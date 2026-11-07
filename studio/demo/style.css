@@ -1,0 +1,186 @@
+/* Colors and font stacks come from the brand package (injected by vite.demo.config.ts). */
+
+@font-face {
+  font-family: 'Selawik';
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/selawik/selawk.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Selawik';
+  font-weight: 600;
+  font-display: swap;
+  src: url('./fonts/selawik/selawksb.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Selawik';
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/selawik/selawkb.woff2') format('woff2');
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  color: var(--ink);
+  font: 17px/1.6 var(--body);
+}
+
+.intro,
+main,
+footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  color: var(--ink);
+}
+
+/* Intro */
+
+.intro {
+  padding-top: 56px;
+  padding-bottom: 40px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand .mark {
+  width: auto;
+  height: 48px;
+}
+
+.brand .word {
+  width: auto;
+  height: 22px;
+  max-width: calc(100% - 64px);
+  object-fit: contain;
+  object-position: left;
+}
+
+h1,
+h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+}
+
+h1 {
+  margin-top: 32px;
+  font-size: clamp(32px, 6vw, 48px);
+}
+
+.lede {
+  max-width: 44em;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 19px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 28px;
+}
+
+.links .button {
+  padding: 8px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.links .button:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* Demos */
+
+.demo {
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.caption {
+  max-width: 44em;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+.tags {
+  margin: 6px 0 0;
+  color: var(--accent);
+  font: 600 13px/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.caption p:not(.tags) {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+canvas-commons-player {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+/* Footer */
+
+footer {
+  padding-bottom: 56px;
+  color: var(--faint);
+  font-size: 15px;
+}
+
+/* A rule inside the padding, so it lines up with the sections' rules. */
+footer::before {
+  content: '';
+  display: block;
+  margin-bottom: 32px;
+  border-top: 1px solid var(--rule);
+}
+
+footer p {
+  max-width: 48em;
+  margin: 0 0 8px;
+}
